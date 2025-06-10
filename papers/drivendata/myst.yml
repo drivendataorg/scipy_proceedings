@@ -1,0 +1,67 @@
+version: 1
+extends: ../papers.yml
+project:
+  id: scipy-2025-drivendata
+  # Ensure your title is the same as in your `main.md`
+  title: "Zamba: Computer vision for wildlife conservation"
+  # subtitle:
+  description: Add a two sentence description about your article.
+  # Authors should have affiliations, emails and ORCIDs if available
+  authors:
+    - name: Emily Dorne
+      email: emily@drivendata.org
+      orcid: 0009-0004-6185-7611
+      affiliations:
+        - DrivenData
+      roles:
+        - Methodology
+        - Software
+        - Supervision
+        - Visualization
+        - Writing - original draft
+    - name: Jay Qi
+      email: jay@drivendata.org
+      orcid: 0009-0000-9154-393X
+      affiliations:
+        - DrivenData
+      roles:
+        - Methodology
+        - Software
+        - Supervision
+        - Visualization
+        - Writing - original draft
+    - name: Peter Bull
+      email: peter@drivendata.org
+      orcid: TKTKTK
+      affiliations:
+        - DrivenData
+      roles:
+        - Methodology
+        - Software
+        - Supervision
+        - Visualization
+        - Writing - original draft
+
+  keywords:
+    - terraforming
+    - desert
+    - numerical perspective
+  # Add the abbreviations that you use in your paper here
+  abbreviations:
+    MPI-EVA: Max Planck Institute for Evolutionary Anthropology
+  # It is possible to explicitly ignore the `doi-exists` check for certain citation keys
+  error_rules:
+    - rule: doi-exists
+      severity: ignore
+      keys:
+        - Atr03
+        - terradesert
+        - jupyter
+        - sklearn1
+        - sklearn2
+  exports:
+    - id: pdf
+      format: typst
+      template: https://github.com/curvenote-templates/scipy.git
+      article: main.md
+      output: full_text.pdf
