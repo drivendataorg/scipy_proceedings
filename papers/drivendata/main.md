@@ -276,7 +276,7 @@ On the holdout set, Zamba achieves a top-1 accuracy[^footnote-top-1-accuracy] of
 [^footnote-top-1-accuracy]: Top-1 accuracy is defined as the percentage of videos where the class with the highest predicted probability is actually present.
 [^footnote-top-3-accuracy]: Top-3 accuracy is the percentage where the true class appears among the top three predicted classes.
 
-[Figure %s](#fig:video-precision-recall) shows precision and recall by class for the holdout set. Eleven species with too few examples were excluded from this analysis. In general, recall tends to be higher for larger animals. However, even for species with lower recall, it is still feasible to use predicted probabilities to flag likely candidates for further review. For example, rodents have a recall of only 22%, but sorting videos by the model’s predicted probability for the “rodent” class remains a useful heuristic—even if other classes have higher probabilities predicted.
+[Figure %s](#fig:video-holdout-precision-recall) shows precision and recall by class for the holdout set. Eleven species with too few examples were excluded from this analysis. In general, recall tends to be higher for larger animals. However, even for species with lower recall, it is still feasible to use predicted probabilities to flag likely candidates for further review. For example, rodents have a recall of only 22%, but sorting videos by the model’s predicted probability for the “rodent” class remains a useful heuristic—even if other classes have higher probabilities predicted.
 
 :::{figure} fig-video-holdout-precision-recall.png
 :label: fig:video-holdout-precision-recall
