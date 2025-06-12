@@ -31,7 +31,6 @@ project:
         - Writing - original draft
     - name: Peter Bull
       email: peter@drivendata.org
-      orcid: TKTKTK
       affiliations:
         - DrivenData
       roles:
@@ -41,19 +40,12 @@ project:
         - Visualization
         - Writing - review & editing
     - name: Hjalmar S. Kühl
-      email: TKTKTK
-      orcid: TKTKTK
       affiliations:
-        - TKTKTK
-      roles:
-        - TKTKTK
+        - Max Planck Institute for Evolutionary Anthropology
     - name: Mimi Arandjelovic
-      email: TKTKTK
       orcid: 0000-0001-8920-9684
       affiliations:
-        - TKTKTK
-      roles:
-        - TKTKTK
+        - Max Planck Institute for Evolutionary Anthropology
 
   keywords:
     - camera traps
