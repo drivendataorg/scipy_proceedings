@@ -61,7 +61,7 @@ In 2025, species classification for images was added in Zamba v2.6.0 and Zamba C
 
 Camera trap videos are especially valuable for researchers studying animal behavior, as they capture rich information including sounds, movements, tool use, and interactions between individuals [@doi:10.1016/j.cub.2019.02.024; @doi:10.1016/j.anbehav.2019.08.008]. Videos also provide multiple views of the same individual, which can aid in identifying characteristics such as sex, size, and age. It can also enable individual identification, which is useful for capture-recapture studies [@doi:10.1002/ecs2.4604].
 
-From a technical standpoint, video classification is more challenging than image classification. It demands more complex model architectures, increased computational resources such as graphics processing units (GPUs), and the ability to manage and process datasets often measured in terabytes. Zamba initially focused on videos in order to address the gap in the tooling ecosystem, as other automated species classification tools only supported still images.
+However, video classification is more challenging than image classification. It demands more complex model architectures, increased computational resources such as graphics processing units (GPUs), and the ability to manage and process datasets often measured in terabytes. Zamba initially focused on videos in order to address the gap in the tooling ecosystem, as other automated species classification tools only supported still images.
 
 In the sections that follow, we describe Zamba’s approach to species classification in videos. This includes the core methodologies, the available pretrained models and features, and performance metrics based on evaluation on a holdout set.
 
@@ -388,6 +388,8 @@ Validation F1 training curves for candidate model architectures.
 The chosen ConvNeXt V2 base model contains 87.7 million parameters and operates on 224×224 pixel input crops. In [Figure %s](#fig:image-architecture-f1-curves), its performance is represented by the dark orange curve.
 
 ## Results
+
+TKTKTK
 
 ## Depth estimation for videos
 
