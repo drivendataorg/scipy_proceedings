@@ -27,7 +27,6 @@ project:
       roles:
         - Methodology
         - Software
-        - Supervision
         - Visualization
         - Writing - original draft
     - name: Peter Bull
@@ -40,12 +39,28 @@ project:
         - Software
         - Supervision
         - Visualization
-        - Writing - original draft
+        - Writing - review & editing
+    - name: Hjalmar S. Kühl
+      email: TKTKTK
+      orcid: TKTKTK
+      affiliations:
+        - TKTKTK
+      roles:
+        - TKTKTK
+    - name: Mimi Arandjelovic
+      email: TKTKTK
+      orcid: 0000-0001-8920-9684
+      affiliations:
+        - TKTKTK
+      roles:
+        - TKTKTK
 
   keywords:
-    - terraforming
-    - desert
-    - numerical perspective
+    - camera traps
+    - computer vision
+    - machine learning
+    - wildlife conservation
+    - distance sampling
   # Add the abbreviations that you use in your paper here
   abbreviations:
     MPI-EVA: Max Planck Institute for Evolutionary Anthropology
