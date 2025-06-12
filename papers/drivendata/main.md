@@ -2,7 +2,8 @@
 # Ensure that this title is the same as the one in `myst.yml`
 title: "Zamba: Computer vision for wildlife conservation"
 abstract: |
-  TKTKTK
+  Camera traps are essential tools in wildlife conservation, yet the sheer volume of data they generate presents a significant bottleneck in manual processing. We present Zamba, an open source Python package designed to streamline camera trap data processing through machine learning. Unlike other tools that are limited to image data, it supports species classification for both still image and video data, as well as depth estimation from videos. It also supports custom species classification model training on user-provided camera trap data containing new species and new geographies not in the included pretrained models. Zamba underlies Zamba Cloud, an accessible no-code web application that makes its inference and training functionality available to non-programmers. By enabling conservationists to efficiently process large datasets and train custom models suited to their unique ecological contexts and research questions, Zamba accelerates wildlife monitoring, research, and evidence-based conservation decision-making.
+
 ---
 
 ## Introduction
@@ -19,11 +20,11 @@ This paper provides an overview of Zamba’s contributions to the conservation c
 
 ## Motivation
 
-Camera traps hold immense potential for conservationists as they are a noninvasive way of monitoring wildlife [REF]. They enable the measurement of species occupancy [@doi:10.1111/1365-2664.12399], relative [@doi:10.1016/j.biocon.2012.12.025] or absolute abundance [@doi:10.1111/2041-210X.12790], population trends over time [@doi:10.1002/rse2.132], patterns in animal behavior [@doi:10.1002/rse2.48; @doi:10.1111/2041-210X.14044], and more. They are also one of the few tools for monitoring multiple species simultaneously [@doi:10.1111/1365-2664.13602].
+Camera traps hold immense potential for conservationists as they are a noninvasive way of monitoring wildlife [@doi:10.1093/oso/9780198850243.003.0005]. They enable the measurement of species occupancy [@doi:10.1111/1365-2664.12399], relative [@doi:10.1016/j.biocon.2012.12.025] or absolute abundance [@doi:10.1111/2041-210X.12790], population trends over time [@doi:10.1002/rse2.132], patterns in animal behavior [@doi:10.1002/rse2.48; @doi:10.1111/2041-210X.14044], and more. They are also one of the few tools for monitoring multiple species simultaneously [@doi:10.1111/1365-2664.13602].
 
 As simple sensors, camera traps do not automatically label or filter the species they observe. Manual review and labeling represent a critical bottleneck, consuming vast amounts of resources that could otherwise support direct conservation actions [@doi:10.3390/ani10010132; @doi:10.1002/rse2.402].
 
-One of the most common needs is filtering out “blank” images and videos, e.g., those that do not contain an animal but rather were a false trigger, potentially caused by wind, rain, or changes in light. These “blanks” account for approximately 70% of captured images [@doi:10.48550/arXiv.1907.06772]. Estimating animal distances in camera trap footage currently entails an extremely manual, time-intensive process. Automated distance extraction is estimated to be 21 times faster than manual labelling [@doi:10.1016/j.ecoinf.2021.101536].
+One of the most common needs is filtering out “blank” images and videos, i.e., those that do not contain an animal but rather were a false trigger, potentially caused by wind, rain, or changes in light. These “blanks” account for up to 70% of captured images [@doi:10.48550/arXiv.1907.06772] in some datasets. Estimating animal distances in camera trap footage currently entails an extremely manual, time-intensive process. Automated distance extraction is estimated to be 21 times faster than manual labelling [@doi:10.1016/j.ecoinf.2021.101536].
 
 While more and more conservation organizations and researchers are collecting and storing camera trap data, many are not yet able to effectively use that data for decision-making. The people-power needed to view and annotate camera trap data is prohibitively expensive in terms of time and money, which results in organizations not using camera traps, data accumulating on hard drives, or long delays in turn-around while teams sift through thousands of incoming images and videos every month.
 
