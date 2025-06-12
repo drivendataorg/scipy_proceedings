@@ -447,7 +447,7 @@ The videos ranged between 5 seconds and 1 minute long. Each annotation includes 
 
 Unlike other datasets that include reference objects at known distances, this dataset did not include any reference objects or reference videos. Reference videos are created as guides for manually labeling distances in videos [@doi:10.1016/j.ecoinf.2021.101536]; however, they are time and resource intensive to record. To create the reference videos, field researchers recorded themselves walking away from each camera trap, holding up a sign every meter to indicate how far they were from the camera. The model was required to learn purely from natural image content.
 
-:::{figure} fig-depth-reference-video.png
+:::{figure} fig-depth-reference-video.jpg
 :label: fig:depth-reference-video
 A researcher in Taï National Park, Côte d'Ivoire holding up a sign at 5 meters away as part of a depth reference video. Image courtesy of Wild Chimpanzee Foundation.
 :::
