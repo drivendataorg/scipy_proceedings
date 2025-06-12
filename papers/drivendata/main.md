@@ -387,7 +387,7 @@ Validation F1 training curves for candidate model architectures.
 
 The chosen ConvNeXt V2 base model contains 87.7 million parameters and operates on 224×224 pixel input crops. In [Figure %s](#fig:image-architecture-f1-curves), its performance is represented by the dark orange curve.
 
-## Results
+### Results
 
 TKTKTK
 
@@ -483,7 +483,7 @@ The median absolute error was relatively similar across species, though the dist
 Distribution of test set absolute error by species.
 :::
 
-@doi:https://doi.org/10.1016/j.ecoinf.2021.101536 applied machine learning to monocular depth using reference videos and a mean absolute error (MAE) of 1.85 m. The relatively similar performance (albeit on different datasets) suggests that this model has comparable accuracy and that the approach without reference videos is feasible for accurate models.
+@doi:10.1016/j.ecoinf.2021.101536 applied machine learning to monocular depth using reference videos and a mean absolute error (MAE) of 1.85 m. The relatively similar performance (albeit on different datasets) suggests that this model has comparable accuracy and that the approach without reference videos is feasible for accurate models.
 
 ## Zamba Cloud
 
