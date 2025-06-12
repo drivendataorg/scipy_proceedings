@@ -5,7 +5,7 @@ project:
   # Ensure your title is the same as in your `main.md`
   title: "Zamba: Computer vision for wildlife conservation"
   # subtitle:
-  description: Add a two sentence description about your article.
+  description: We present Zamba, an open source Python package designed to streamline camera trap data processing through machine learning. Zamba supports inference and custom model training for species classification on videos and images, as well as depth estimation inference for videos.
   # Authors should have affiliations, emails and ORCIDs if available
   authors:
     - name: Emily Dorne
