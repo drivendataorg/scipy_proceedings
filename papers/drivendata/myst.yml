@@ -66,6 +66,7 @@ project:
   # Add the abbreviations that you use in your paper here
   abbreviations:
     MPI-EVA: Max Planck Institute for Evolutionary Anthropology
+    WCF: Wild Chimpanzee Foundation
     ML: Machine learning
     CNN: Convolutional neural network
     ECDF: Empirical cumulative distribution function
