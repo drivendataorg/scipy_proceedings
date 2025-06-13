@@ -31,6 +31,7 @@ project:
         - Writing - original draft
     - name: Peter Bull
       email: peter@drivendata.org
+      orcid: 0000-0001-5709-8799
       affiliations:
         - DrivenData
       roles:
@@ -42,8 +43,16 @@ project:
     - name: Hjalmar S. Kühl
       affiliations:
         - Max Planck Institute for Evolutionary Anthropology
+      roles:
+        - Conceptualization
+        - Supervision
+        - Writing - review & editing
     - name: Mimi Arandjelovic
       orcid: 0000-0001-8920-9684
+      roles:
+        - Conceptualization
+        - Supervision
+        - Writing - review & editing
       affiliations:
         - Max Planck Institute for Evolutionary Anthropology
 
