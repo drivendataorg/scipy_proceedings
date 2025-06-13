@@ -1,0 +1,34 @@
+digraph CameraTrapPipeline {
+    /*--- global graph aesthetics ---*/
+    graph [
+        rankdir = LR              /* left-to-right layout                   */
+        dpi      = 300            /* print-quality resolution               */
+        margin   = "0.15,0.1"     /* tighten white-space around the figure  */
+    ];
+    node [
+        fontname = "ui-sans-serif"
+        fontsize = 11
+        shape    = box
+        penwidth = 1.2
+        style    = "filled,rounded"
+    ];
+    edge [
+        penwidth = 1.2
+        arrowsize = 0.8
+    ];
+
+    /*--- nodes ---*/
+    Image        [label = "Image\ninput",            fillcolor = "#F2F2F2"];   /* data source */
+    Detect       [label = "Animal detection and cropping\n(MegaDetector)",
+                  fillcolor = "#C5D8F3"];                                      /* processing */
+    Crops       [label = "Cropped animals",     fillcolor = "#F2F2F2"];   /* data */
+    Classify     [label = "Classification model",
+                  fillcolor = "#C5D8F3"];                                      /* processing */
+    PredSpecies  [label = "Predicted\nspecies",      fillcolor = "#F2F2F2"];   /* result */
+
+    /*--- edges ---*/
+    Image       -> Detect;
+    Detect      -> Crops;
+    Crops      -> Classify;
+    Classify    -> PredSpecies;
+}
