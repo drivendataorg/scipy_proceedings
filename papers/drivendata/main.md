@@ -41,7 +41,7 @@ In the Pri-matrix Factorization Challenge [@primatrix_competition], hosted by Dr
 
 [^footnote-chimpandsee-labeling]: Since this data was non-expert labeled, certain thresholds on how many user annotations were required to accept a label as well as thresholds related to percentages of user agreement were applied to go from raw annotations to a well-labeled dataset.
 
-[^footnote-primatrix-winning-model]: Since Zamba’s origins in 2017, computer vision techniques have evolved significantly. The original algorithm implemented in Zamba v1 used an ensemble of five models with architectures based on convolutional neural networks (CNNs)—ImageNet—ResNet50, ResNet152, InceptionV3, Xception, and Inception-ResNetV2. Base models trained on ImageNet were fine-tuned. Then, class probabilities for 32 frames per clip were aggregated into summary statistics and passed to a second-level XGBoost [@doi:10.1145/2939672.2939785] model, which generated the final species prediction. [@primatrix_results] This model was replaced in 2021 with the release of Zamba v2 so is not discussed in more depth here.
+[^footnote-primatrix-winning-model]: Since Zamba’s origins in 2017, computer vision techniques have evolved significantly. The original algorithm implemented in Zamba v1 used an ensemble of five models with architectures based on convolutional neural networks (CNNs)—ImageNet—ResNet50, ResNet152 [@doi:10.48550/arXiv.1512.03385], InceptionV3 [@doi:10.48550/arXiv.1512.00567], Xception [@doi:10.48550/arXiv.1610.02357], and Inception-ResNetV2 [@doi:10.48550/arXiv.1602.07261]. Base models trained on ImageNet were fine-tuned. Then, class probabilities for 32 frames per clip were aggregated into summary statistics and passed to a second-level XGBoost [@doi:10.1145/2939672.2939785] model, which generated the final species prediction. [@primatrix_results] This model was replaced in 2021 with the release of Zamba v2 so is not discussed in more depth here.
 
 **2018: Zamba Cloud**
 
@@ -540,7 +540,7 @@ As a command-line program and Python library distributed as a package, Zamba is 
 
 In order to make Zamba easy to use and accessible to any camera trap researcher, a point-and-click graphical-user interface program was developed. [Zamba Cloud](https://www.zambacloud.com/) is a web application with no-code workflows to use Zamba's capabilities. Zamba Cloud currently has workflows that support the species classification for videos and species classification for images tasks. For both tasks, users can fine-tune from any of Zamba's pretrained models, and they can perform inference on unlabeled videos/images using a pretrained model, one of their fine-tuned models, or a fine-tuned model that another user has chosen to make publicly available.
 
-All of the workflows start with uploading videos or images using a drag-and-drop interface. Alternatively, uploads via an FTP server are also supported. One key tradeoff of implementing a web application, as opposed to a desktop application, is that users are required to have internet access with sufficient bandwidth. To mitigate the bandwidth requirements, Zamba Cloud implements an optional upload process that performs client-side video resizing. This option uses ffmeg.wasm [@ffmpeg_wasm], a WebAssembly port of FFmpeg to reduce the resolution and framerate of submitted videos to fixed sizes. If fine-tuning, users additionally upload label data and confirm whether they match to existing label classes or are new classes.
+All of the workflows start with uploading videos or images using a drag-and-drop interface. Alternatively, uploads via an FTP server are also supported. One key tradeoff of implementing a web application, as opposed to a desktop application, is that users are required to have internet access with sufficient bandwidth. To mitigate the bandwidth requirements, Zamba Cloud implements an optional upload process that performs client-side video resizing. This option uses ffmeg.wasm [@ffmpeg_wasm], a WebAssembly port of FFmpeg [@ffmpeg] to reduce the resolution and framerate of submitted videos to fixed sizes. If fine-tuning, users additionally upload label data and confirm whether they match to existing label classes or are new classes.
 
 :::{figure} fig-zambacloud-training-workflow.png
 :label: fig:zambacloud-training-workflow
@@ -558,7 +558,7 @@ Screenshot of the prediction review interface in Zamba Cloud.
 
 Predictions from the inference workflow are exportable in comma-separated values (CSV) format. CSV is chosen as a simple, open format that is portable and supported by common spreadsheet software.
 
-Zamba Cloud's server is implemented in Python using Django. Machine learning workloads are containerized and submitted as batch jobs to a Kubernetes cluster.
+Zamba Cloud's server is implemented in Python using Django [@django]. Machine learning workloads are containerized and submitted as batch jobs to a Kubernetes cluster.
 
 :::{figure} fig-zamba-cloud-architecture.png
 :label: fig:zamba-cloud-architecture
