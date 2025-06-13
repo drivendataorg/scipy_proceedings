@@ -2,8 +2,7 @@
 # Ensure that this title is the same as the one in `myst.yml`
 title: "Zamba: Computer vision for wildlife conservation"
 abstract: |
-  Camera traps are essential tools in wildlife conservation, yet the sheer volume of data they generate presents a significant bottleneck in manual processing. We present Zamba, an open source Python package designed to streamline camera trap data processing through machine learning. Unlike other tools that are limited to image data, it supports species classification for both still image and video data, as well as depth estimation from videos. It also supports custom species classification model training on user-provided camera trap data containing new species and new geographies not in the included pretrained models. Zamba underlies Zamba Cloud, an accessible no-code web application that makes its inference and training functionality available to non-programmers. By enabling conservationists to efficiently process large datasets and train custom models suited to their unique ecological contexts and research questions, Zamba accelerates wildlife monitoring, research, and evidence-based conservation decision-making.
-
+  Camera traps are indispensable tools in wildlife conservation, but the vast volume of data they generate creates a significant bottleneck in manual processing. We present [Zamba](https://github.com/drivendataorg/zamba), an open-source Python package that leverages machine learning to streamline camera trap data analysis. Unlike most existing tools that support only image data, Zamba enables species classification for both still images and videos, as well as depth estimation from videos. It also supports custom model training on user-provided data, allowing adaptation to new species and geographic regions not covered by pretrained models. Zamba powers [Zamba Cloud](https://www.zambacloud.com), a no-code web application that makes these capabilities accessible to non-programmers. By enabling conservationists to efficiently analyze large datasets and train models tailored to their specific ecological contexts, Zamba advances wildlife monitoring, research, and evidence-based conservation decision-making.
 ---
 
 ## Introduction
@@ -12,7 +11,7 @@ Camera traps are automated camera systems typically triggered by motion, heat, o
 
 Automated computer vision systems offer a natural solution to assist with this data processing. Yet, two key gaps in the ecosystem remain. First, most tools only support processing image data, not video [@doi:10.1111/2041-210X.14044], and it is not computationally feasible to predict on all frames in a video as if they are images. Moreover, models that process video natively can leverage inter-frame information—such as motion—that is otherwise lost. Second, pretrained models fail to capture the wide range of environments and use cases for which camera traps are deployed. Wildlife monitoring projects vary widely in habitat, focal species, deployment context, and taxonomic resolution, necessitating adaptable models that can be fine-tuned to specific contexts.
 
-We present [Zamba](https://github.com/drivendataorg/zamba), an open source Python package for using machine learning to process camera trap data. Zamba supports species classification for both videos and still images. Zamba also supports custom model training on user-provided camera trap data containing new species and new geographies not in the included pretrained models. In addition, Zamba includes inference-only video processing pipelines for depth estimation. Zamba also underlies Zamba Cloud, which is an accessible no-code web application that runs the python package on managed cloud resources. Zamba Cloud bridges a critical gap between the technical feasibility of training models and the practical ability for conservationists — who are often not programmers — to use them.
+We present [Zamba](https://github.com/drivendataorg/zamba), an open source Python package for using machine learning to process camera trap data. Zamba supports species classification for both videos and still images. Zamba also supports custom model training on user-provided camera trap data containing new species and new geographies not in the included pretrained models. In addition, Zamba includes inference-only video processing pipelines for depth estimation. Zamba also underlies [Zamba Cloud](https://www.zambacloud.com/), which is an accessible no-code web application that runs the python package on managed cloud resources. Zamba Cloud bridges a critical gap between the technical feasibility of training models and the practical ability for conservationists — who are often not programmers — to use them.
 
 By enabling conservationists to efficiently process large datasets and train custom models suited to their unique ecological contexts and research questions, Zamba accelerates wildlife monitoring, research, and evidence-based conservation decision-making.
 
@@ -34,28 +33,33 @@ Accurate, accessible, and automated species detection enables improved monitorin
 
 ## Development history
 
-Zamba has its origins in the Pri-matrix Factorization Challenge [@primatrix_competition], an online machine learning competition hosted by DrivenData in 2017 in partnership with experts from the Max Planck Institute for Evolutionary Anthropology. Machine learning competitions have proven effective at harnessing community-driven innovation and enabling the rapid testing of thousands of approaches to solving a problem [@doi:10.48550/arXiv.1606.07781].
+Zamba's development has its origins in online machine learning challenges hosted by DrivenData in partnership with wildlife conservation experts—in particular from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA). Machine learning competitions have proven effective at harnessing community-driven innovation and enabling the rapid testing of thousands of approaches to solving a problem [@doi:10.48550/arXiv.1606.07781]. Zamba, named after the word for “forest” in Lingala, was created to make these advances more accessible to ecologists and conservationists.
 
-In this challenge, over 320 participants competed to develop accurate species detection models for camera trap video data. The competition used a unique dataset created through the Chimp&See Zooniverse project [@doi:10.1002/rse2.402], where thousands of citizen scientists manually labeled camera trap videos. Their efforts produced nearly 2,000 hours of annotated footage from the Chimp&See database[^footnote-chimpandsee-labeling]. The winning algorithm achieved 96% accuracy in detecting wildlife presence and 99% average accuracy in classifying species across 23 label classes [@primatrix_results].
+**2017: Pri-matrix Factorization Challenge and Zamba v1**
+
+In the Pri-matrix Factorization Challenge [@primatrix_competition], hosted by DrivenData and MPI-EVA, over 320 participants competed to develop accurate species detection models for camera trap video data. The competition used a unique dataset created through the Chimp&See Zooniverse project [@doi:10.1002/rse2.402], where thousands of citizen scientists manually labeled camera trap videos. Their efforts produced nearly 2,000 hours of annotated footage from the Chimp&See database[^footnote-chimpandsee-labeling]. The winning algorithm[^footnote-primatrix-winning-model] achieved 96% accuracy in detecting wildlife presence and 99% average accuracy in classifying species across 23 label classes [@primatrix_results] and formed the foundation of the initial version of Zamba, available through a command-line interface (CLI).
 
 [^footnote-chimpandsee-labeling]: Since this data was non-expert labeled, certain thresholds on how many user annotations were required to accept a label as well as thresholds related to percentages of user agreement were applied to go from raw annotations to a well-labeled dataset.
 
-To make these computer vision advances more accessible to ecologists and conservationists, the top-performing model from the Pri-matrix Factorization Challenge[^footnote-primatrix-winning-model] was simplified and adapted into an open-source command-line tool called Zamba, named after the word for “forest” in Lingala.
-
 [^footnote-primatrix-winning-model]: Since Zamba’s origins in 2017, computer vision techniques have evolved significantly. The original algorithm implemented in Zamba v1 used an ensemble of five models with architectures based on convolutional neural networks (CNNs)—ImageNet—ResNet50, ResNet152, InceptionV3, Xception, and Inception-ResNetV2. Base models trained on ImageNet were fine-tuned. Then, class probabilities for 32 frames per clip were aggregated into summary statistics and passed to a second-level XGBoost model, which generated the final species prediction. [@primatrix_results] This model was replaced in 2021 with the release of Zamba v2 so is not discussed in more depth here.
 
-In 2018, Zamba was developed from a command-line tool into a web application, called Zamba Cloud, to drive wider accessibility and adoption. This lets Zamba run on performant, specialized hardware and provides an easy-to-use interface for conservationists.
+**2018: Zamba Cloud**
 
-In 2018, Zamba was further developed into a web application—Zamba Cloud—to promote wider accessibility and adoption. Zamba Cloud enabled users to run Zamba on high-performance, cloud-based infrastructure through an easy-to-use web interface.
+Zamba was further developed into a web application—Zamba Cloud—to promote wider accessibility and adoption. Zamba Cloud enabled users to run Zamba on high-performance, cloud-based infrastructure through an easy-to-use web interface.
 
-In 2021, Zamba underwent a major re-architecture to leverage recent advances in computer vision, released as Zamba v2.0.0. Its models were also retrained on an expanded dataset of 250,000 labeled camera trap videos[^footnote-zamba-retraining]. This update also introduced support for fine-tuning custom models on videos and incorporated a smarter frame selection strategy using a newly trained machine learning model called MegadetectorLite.
+**2021: Zamba v2**
+
+Zamba underwent a major re-architecture to leverage recent advances in computer vision, released as Zamba v2.0.0. Its models were also retrained on an expanded dataset of 250,000 labeled camera trap videos[^footnote-zamba-retraining]. This update also introduced support for fine-tuning custom models on videos and incorporated a smarter frame selection strategy using a newly trained machine learning model called MegadetectorLite.
 
 [^footnote-zamba-retraining]: This retraining update also addressed artifacts from the original competition. For example, the competition’s lack of site-aware splitting contributed to inflated performance metrics by allowing models to learn location-specific features from backgrounds. Additionally, labeling errors stemming from crowd-sourced annotations were corrected using a curated set of 125,000 expert-labeled videos, which significantly improved performance for certain species.
 
-Also in 2021, DrivenData partnered again with the Max Planck Institute for Evolutionary Anthropology and the Wild Chimpanzee Foundation to host the Deep Chimpact: Depth Estimation for Wildlife Conservation challenge [@deepchimpact_competition]. More than 300 participants competed to develop models for monocular depth estimation—inferring the distance between camera traps and wildlife appearing at various points in video footage. In 2022, the second-place model from this challenge was integrated into Zamba as an inference module.
+**2021: Deep-Chimpact Challenge and depth estimation**
 
-In 2025, species classification for images was added in Zamba v2.6.0 and Zamba Cloud. This major update, supported by the WILDLABS Awards 2024, focused on enabling non-programmer users to train custom image classification models through Zamba Cloud’s no-code interface. The work involved aggregating diverse image datasets, experimenting with model architectures, and training a robust base model spanning 178 taxonomic label classes.
+DrivenData partnered again with the Max Planck Institute for Evolutionary Anthropology and the Wild Chimpanzee Foundation to host the Deep Chimpact: Depth Estimation for Wildlife Conservation challenge [@deepchimpact_competition]. More than 300 participants competed to develop models for monocular depth estimation—inferring the distance between camera traps and wildlife appearing at various points in video footage. In 2022, the second-place model from this challenge was integrated into Zamba as an inference module.
 
+**2024–2025: Species classification for images**
+
+In March 2025, species classification for images was added in Zamba v2.6.0 and Zamba Cloud. This major update, supported by the WILDLABS Awards 2024, focused on enabling non-programmer users to train custom image classification models through Zamba Cloud’s no-code interface. The work involved aggregating diverse image datasets, experimenting with model architectures, and training a robust base model spanning 178 taxonomic label classes.
 
 ## Classifying species in videos
 
@@ -230,7 +234,7 @@ The `slowfast` model architecture uses the SlowFast [@doi:10.48550/arXiv.1812.03
 
 #### Frame selection approach
 
-One of the key technical challenges in working with camera trap videos—rather than still images—is frame selection. With approximately 32 frames per second and videos typically lasting 60 seconds, processing every frame as an image is computationally infeasible. To enable downstream tasks like species classification or depth estimation, the system must select only those frames that are most likely to contain useful information. Poor frame selection can significantly degrade downstream performance: if selected frames do not contain the animal, accurate prediction becomes impossible.
+One of the key technical challenges in working with camera trap videos—rather than still images—is frame selection. For datasets of interest, videos were 30 frames per second and typically about 60 seconds. Processing every frame as an image for such videos is computationally infeasible. Furthermore, animals may only be present in a minority of recorded frames, and processing "blank" frames is wasteful or can potentially degrade performance of downstream tasks.
 
 ::::{figure}
 :label: fig:video-animal-present-examples
@@ -247,6 +251,11 @@ Two example videos where the animal is only present for the first few seconds of
 ::::
 
 The default frame selection method currently used by Zamba is an efficient object detection model we developed called MegadetectorLite. This model evaluates each frame for the likelihood that it contains an animal. The top 16 frames with the highest detection probabilities are selected and passed to either the species classification or blank detection models.
+
+:::{figure} fig-video-pipeline-flow.png
+:label: fig:video-pipeline-flow
+Flow diagram of the video species classification pipeline. Gray nodes indicate data and blue nodes indicate a processing step.
+:::
 
 Because frame selection is an upstream task, it must be fast without sacrificing too much accuracy. Larger models tend to be more accurate but are slower to run. MegadetectorLite is based on the YOLOX architecture [@doi:10.48550/arXiv.2107.08430] and was trained using a knowledge distillation approach [@doi:10.48550/arXiv.1503.02531] (also known as teacher–student training). It uses the predictions of the original MegaDetector [@doi:10.48550/arXiv.1907.06772] as supervisory labels. MegaDetector itself is a highly accurate, but computationally intensive, object detection model trained specifically on camera trap imagery. While MegaDetector is used directly in Zamba’s image workflows, it is too slow for frame-by-frame inference in video processing. MegadetectorLite offers a more efficient alternative with a lightweight architecture.
 
@@ -271,7 +280,7 @@ Distribution of label classes in video model holdout set.
 
 ##### Species classification
 
-On the holdout set, Zamba achieves a top-1 accuracy[^footnote-top-1-accuracy] of 82% and a top-3 accuracy[^footnote-top-3-accuracy] of 94%. Performance varies across regions depending on species diversity. For example, in the limited sample of videos from Equatorial Guinea, only three species are represented. In this case, top-1 accuracy is 97%, significantly above the global average. In contrast, Ivory Coast videos contain 21 species, making classification more challenging; here, top-1 accuracy drops to 80%.
+On the holdout set, African species `time_distributed` model achieves a top-1 accuracy[^footnote-top-1-accuracy] of 82% and a top-3 accuracy[^footnote-top-3-accuracy] of 94%. Performance varies across regions depending on species diversity. For example, in the limited sample of videos from Equatorial Guinea, only three species are represented. In this case, top-1 accuracy is 97%, significantly above the global average. In contrast, Ivory Coast videos contain 21 species, making classification more challenging; here, top-1 accuracy drops to 80%.
 
 [^footnote-top-1-accuracy]: Top-1 accuracy is defined as the percentage of videos where the class with the highest predicted probability is actually present.
 [^footnote-top-3-accuracy]: Top-3 accuracy is the percentage where the true class appears among the top three predicted classes.
@@ -292,7 +301,7 @@ Model performance tends to be lower for:
 
 ##### Blank detection
 
-Blank detection is an important feature in camera trap workflows due to the high prevalence of blank videos. In our holdout set, 42% of videos contain no animal activity. The blank detection model achieved 87% recall (correctly identifies 11,288 of 13,034 blank videos) and 84% precision (13,507 videos predicted as blank, of which 11,288 were correct).
+Blank detection is an important feature in camera trap workflows due to the high prevalence of blank videos. In our holdout set, 42% of videos contain no animal activity. The `blank_nonblank` model achieved 87% recall (correctly identifies 11,288 of 13,034 blank videos) and 84% precision (13,507 videos predicted as blank, of which 11,288 were correct).
 
 #### Configuration and customization
 
@@ -334,7 +343,12 @@ In the sections that follow, we outline the core methods Zamba employs for speci
 
 Following the approach of @doi:10.1049/cvi2.12318, Zamba’s image classification pipeline first applies a species-agnostic object detection model to extract bounding box crops of detected animals. The image classification model then operates solely on these cropped regions, rather than processing the full-frame image.
 
-For object detection, Zamba uses MegaDetector [@doi:10.48550/arXiv.1907.06772], a widely adopted open-source model designed specifically for wildlife camera trap data. MegaDetector identifies animals, humans, and vehicles in camera trap imagery and is a standard component in many ecological processing pipelines. For additional technical details and performance evaluations of MegaDetector, see @doi:10.1111/2041-210X.14044.
+For object detection, Zamba uses MegaDetector [@doi:10.48550/arXiv.1907.06772], a widely adopted open-source model designed specifically for wildlife camera trap data. MegaDetector identifies animals, humans, and vehicles in camera trap imagery and is a standard component in many ecological processing pipelines [@doi:10.1111/2041-210X.14044]. For additional technical details and performance evaluations of MegaDetector, see @doi:10.1111/2041-210X.14044.
+
+:::{figure} fig-image-pipeline-flow.png
+:label: fig:image-pipeline-flow
+Flow diagram of the image species classification pipeline. Gray nodes indicate data and blue nodes indicate a processing step.
+:::
 
 #### Training data
 
@@ -382,6 +396,7 @@ We evaluated several modern neural network architectures that post-date the comm
 
 :::{figure} fig-image-architecture-f1-curves.png
 :label: fig:image-architecture-f1-curves
+:width: 640px
 Validation F1 training curves for candidate model architectures.
 :::
 
@@ -391,7 +406,7 @@ The chosen ConvNeXt V2 base model contains 87.7 million parameters and operates 
 
 #### Pretrained model performance
 
-As discussed for videos, metrics for camera trap tasks are highly dataset-dependent and can vary widely based on deployment context and class balance. Here, we report some illustrative metrics for Zamba's pretrained image model `lila.science` using holdout validation.
+As with videos, metrics for camera trap tasks are highly dataset-dependent and can vary widely based on deployment context and class balance. Here, we report some illustrative metrics for Zamba's pretrained image model `lila.science` using holdout validation.
 
 The holdout set reported here contains 449,263 randomly sampled observations held out from training. Splits were performed on a transect-by-transect basis[^footnote-image-transect] while ensuring at least one transect representing each label class is present in all splits. The holdout set is highly unbalanced, with a exponential-like distribution of class sizes. [Figure %s](#fig:image-class-obs-ecdf) shows an empirical cumulative distribution function (ECDF) of the number of observations in each class.
 
@@ -399,6 +414,7 @@ The holdout set reported here contains 449,263 randomly sampled observations hel
 
 :::{figure} fig-image-class-obs-ecdf.png
 :label: fig:image-class-obs-ecdf
+:width: 640px
 ECDF of showing the distribution of class sizes. The curve shows the proportion of the label classes with up to the number of observations in the holdout set given by the x-axis value. Note that the x-axis is shown in log-scale.
 :::
 
@@ -406,10 +422,11 @@ On the holdout set, the `lila.science` model achieved 90.1% top-1 accuracy. Perf
 
 :::{figure} fig-image-f1-ecdf.png
 :label: fig:image-f1-ecdf
+:width: 640px
 Complementary ECDF of F1 score for label classes in the holdout set with at least 30 observations. The curve shows the count of label classes whose F1 score exceeds the value given by the x-axis.
 :::
 
-[Figure %s](#fig:image-precision-recall) shows the precision and recall scores for top 10 and bottom 10 label classes when ranked by F1 score. This shows that the model performs highly accurately on the top performing label classes. For the weakest label classes, there is a mix of strong-precision–weak-recall, weak-precision–strong-recall, or weak performance in both metrics. The weakest classes tend to be classes with the fewest observations in the test set (<100), although some classes with many observations like `hippotragini` and `columbimorph_bird` with thousands of test observations show relatively low recall scores.
+[Figure %s](#fig:image-precision-recall) shows the precision and recall scores for top 10 and bottom 10 label classes when ranked by F1 score. This shows that the model performs highly accurately on the top performing label classes. For the weakest label classes, there is a mix of strong-precision–weak-recall, weak-precision–strong-recall, or weak performance in both metrics. The weakest classes tend to be classes with the fewest observations in the test set (<100), although some classes with many observations like `hippotragini` and `columbimorph_bird` with thousands of test observations show relatively low recall scores. Cases of weak performance are often driven by confusion between phenotypically similar classes; for instance, observations involving types are birds are often predicted at different taxonomic granularity from the label.
 
 :::{figure} fig-image-precision-recall
 :label: fig:image-precision-recall
@@ -422,7 +439,7 @@ Statistical models can be used to estimate animal abundance from camera trapping
 
 ### Methods
 
-As discussed in the "Development History" section above, the Deep Chimpact machine learning challenge was held to develop and train models for performing depth estimation on monocular camera trap videos.
+As discussed in the ["Development History"](#development-history) section above, the Deep Chimpact machine learning challenge was held to develop and train models for performing depth estimation on monocular camera trap videos.
 
 The top performing model from the second place ensemble[^footnote-depth-second-place] was integrated into Zamba as an inference-only module[^footnote-depth-training]. As no additional retraining was conducted, the below sections describe the competition data and results.
 
@@ -479,9 +496,14 @@ A researcher in Taï National Park, Côte d'Ivoire holding up a sign at 5 meters
 
 #### Model architecture
 
-The depth estimation pipeline applies the following steps. First, videos are resampled to one frame per second to match the training dataset. Next, an object detection model is used on each frame to find frames with animals in them. The object detection model used is MegadetectorLite. See the ["Frame selection approach"][#frame-selection-approach] section in "Classifying species in videos" previously for more details about MegadetectorLite. Then, the depth estimation model estimates distance between the animal and the camera for each frame.[^footnote-depth-individuals]
+The depth estimation pipeline applies the following steps. First, videos are resampled to one frame per second to match the training dataset. Next, an object detection model is used on each frame to find frames with animals in them. The object detection model used is MegadetectorLite. See the ["Frame selection approach"](#frame-selection-approach) section in "Classifying species in videos" previously for more details about MegadetectorLite. Then, the depth estimation model estimates distance between the animal and the camera for each frame.[^footnote-depth-individuals]
 
 [^footnote-depth-individuals]: Although the model was trained on single-individual videos, it produces an output for each detected animal in a frame. However, for frames with multiple individuals, the distance for all animals will be the same. If there is no animal in the frame, the distance will be null.
+
+:::{figure} fig-depth-pipeline-flow.png
+:label: fig:depth-pipeline-flow
+Flow diagram of the video depth estimation pipeline. Gray nodes indicate data and blue nodes indicate a processing step.
+:::
 
 The depth estimation model uses an EfficientNetV2 [@doi:10.48550/arXiv.2104.00298] backbone and the output is a scalar estimated distance in meters between the animal and the camera. The inputs to the model are 5 frames stacked channelwise, where the frames are chronological and the middle frame corresponds to the present frame for which the depth estimation is made.  The frames are downsampled to 270x480. The model was trained with heavy augmentations for 80 epochs with a batch size of 32, AdamW optimizer, and CosineAnnealingLR scheduler with a period of 25 epochs.
 
@@ -491,6 +513,7 @@ Model performance is reported for the test set of nearly 12,000 frames described
 
 :::{figure} fig-depth-test-distance-distr.png
 :label: fig:depth-test-distance-distr
+:width: 540px
 Distribution of distances in the depth estimation test set
 :::
 
@@ -498,6 +521,7 @@ The depth estimation model has a mean absolute error (MAE) of 1.635m. The model 
 
 :::{figure} fig-depth-prediction-density.png
 :label: fig:depth-prediction-density
+:width: 540px
 Density plot of predicted vs. actual distance for the depth estimation model
 :::
 
@@ -505,6 +529,7 @@ The median absolute error was relatively similar across species, though the dist
 
 :::{figure} fig-depth-abs-error-by-species.png
 :label: fig:depth-abs-error-by-species
+:width: 640px
 Distribution of test set absolute error by species.
 :::
 
@@ -514,9 +539,9 @@ Distribution of test set absolute error by species.
 
 As a command-line program and Python library distributed as a package, Zamba is capable and easily deployable. However, there are still two major limitations. First, not all researchers have such hardware available with graphical processing units (GPUs) to run deep learning models in a practical way. Without this specialized hardware running Zamba's models on large datasets of videos or images is inefficient. Secondly, many wildlife conservationists are not programmers and may have little experience with command-line programs or scripting in Python, and it can be a barrier to create the environment and install the dependencies to run these tools.
 
-In order to make Zamba easy to use and accessible to any camera trap researcher, a point-and-click graphical-user interface program was developed. Zamba Cloud is a web application with no-code workflows to use Zamba's capabilities. Zamba Cloud currently has workflows that support the species classification for videos and species classification for images tasks. For both tasks, users can fine-tune from any of Zamba's pretrained models, and they can perform inference on unlabeled videos/images using a pretrained model, one of their fine-tuned models, or a fine-tuned model that another user has chosen to make publicly available.
+In order to make Zamba easy to use and accessible to any camera trap researcher, a point-and-click graphical-user interface program was developed. [Zamba Cloud](https://www.zambacloud.com/) is a web application with no-code workflows to use Zamba's capabilities. Zamba Cloud currently has workflows that support the species classification for videos and species classification for images tasks. For both tasks, users can fine-tune from any of Zamba's pretrained models, and they can perform inference on unlabeled videos/images using a pretrained model, one of their fine-tuned models, or a fine-tuned model that another user has chosen to make publicly available.
 
-All of the workflows start with uploading videos or images using a drag-and-drop interface. Alternatively, uploads via an FTP server are also supported. One key tradeoff of implementing a web application, as opposed to a desktop application, is that users are required to have internet access with sufficient bandwidth. To mitigate the bandwidth requirements, Zamba Cloud implements an optional upload process that performs client-side video resizing. This option uses WebAssembly ffmpeg to reduce the resolution and framerate of submitted videos to fixed sizes. If fine-tuning, users additionally upload label data and confirm whether they match to existing label classes or are new classes.
+All of the workflows start with uploading videos or images using a drag-and-drop interface. Alternatively, uploads via an FTP server are also supported. One key tradeoff of implementing a web application, as opposed to a desktop application, is that users are required to have internet access with sufficient bandwidth. To mitigate the bandwidth requirements, Zamba Cloud implements an optional upload process that performs client-side video resizing. This option uses ffmeg.wasm [@ffmpeg_wasm], a WebAssembly port of FFmpeg to reduce the resolution and framerate of submitted videos to fixed sizes. If fine-tuning, users additionally upload label data and confirm whether they match to existing label classes or are new classes.
 
 :::{figure} fig-zambacloud-training-workflow.png
 :label: fig:zambacloud-training-workflow
@@ -536,6 +561,10 @@ Predictions from the inference workflow are exportable in comma-separated values
 
 Zamba Cloud's server is implemented in Python using Django. Machine learning workloads are containerized and submitted as batch jobs to a Kubernetes cluster.
 
+:::{figure} fig-zamba-cloud-architecture.png
+:label: fig:zamba-cloud-architecture
+Architecture diagram of Zamba Cloud.
+:::
 
 ## Discussion
 

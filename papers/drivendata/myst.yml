@@ -52,12 +52,15 @@ project:
     - computer vision
     - machine learning
     - wildlife conservation
-    - distance sampling
+    - species classification
+    - depth estimation
   # Add the abbreviations that you use in your paper here
   abbreviations:
     MPI-EVA: Max Planck Institute for Evolutionary Anthropology
     ML: Machine learning
     CNN: Convolutional neural network
+    ECDF: Empirical cumulative distribution function
+    FTP: File transfer protocol
   # It is possible to explicitly ignore the `doi-exists` check for certain citation keys
   error_rules:
     - rule: doi-exists
@@ -68,6 +71,7 @@ project:
         - deepchimpact_competition
         - fastai_timedistributed
         - lila_bc
+        - ffmpeg_wasm
   exports:
     - id: pdf
       format: typst
