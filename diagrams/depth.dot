@@ -1,0 +1,37 @@
+digraph CameraTrapPipeline {
+    /*--- global graph aesthetics ---*/
+    graph [
+        rankdir = LR              /* left-to-right layout                   */
+        dpi      = 300            /* print-quality resolution               */
+        margin   = "0.15,0.1"     /* tighten white-space around the figure  */
+    ];
+    node [
+        fontname = "ui-sans-serif"
+        fontsize = 11
+        shape    = box
+        penwidth = 1.2
+        style    = "filled,rounded"
+    ];
+    edge [
+        penwidth = 1.2
+        arrowsize = 0.8
+    ];
+
+    /*--- nodes ---*/
+    Video        [label = "Video\ninput",            fillcolor = "#F2F2F2"];   /* data source */
+    Resample       [label = "Resample",
+                  fillcolor = "#C5D8F3"];                                      /* processing */
+    Detect       [label = "Detect animals\n(MegaDetector)",
+                  fillcolor = "#C5D8F3"];                                      /* processing */
+    Detections       [label = "Detection\nbounding boxes",     fillcolor = "#F2F2F2"];   /* data */
+    Depth     [label = "Depth estimation\nmodel",
+                  fillcolor = "#C5D8F3"];                                      /* processing */
+    PredDepth   [label = "Predicted\ndistance",      fillcolor = "#F2F2F2"];   /* result */
+
+    /*--- edges ---*/
+    Video       -> Resample;
+    Resample      -> Detect;
+    Detect      -> Detections;
+    Detections      -> Depth;
+    Depth    -> PredDepth;
+}
