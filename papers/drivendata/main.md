@@ -412,7 +412,7 @@ Complementary ECDF of F1 score for label classes in the holdout set with at leas
 [Figure %s](#fig:image-precision-recall) shows the precision and recall scores for top 10 and bottom 10 label classes when ranked by F1 score. This shows that the model performs highly accurately on the top performing label classes. For the weakest label classes, there is a mix of strong-precision–weak-recall, weak-precision–strong-recall, or weak performance in both metrics. The weakest classes tend to be classes with the fewest observations in the test set (<100), although some classes with many observations like `hippotragini` and `columbimorph_bird` with thousands of test observations show relatively low recall scores.
 
 :::{figure} fig-image-precision-recall
-:label: fig:-image-precision-recallf
+:label: fig:image-precision-recall
 Precision and recall values for a selection of label classes. The top half are the top 10 label classes ranked by F1 score, while the bottom half are the bottom 10 label classes ranked by F1 score. The parenthetical annotation gives the number of observations of that class.
 :::
 
