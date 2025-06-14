@@ -31,13 +31,14 @@ Machine learning (ML) models have shown significant promise in automating specie
 
 Accurate, accessible, and automated species detection enables improved monitoring of animal populations and evaluation of conservation impacts on species abundance. Faster processing of camera trap data allows conservationists to conduct these assessments in weeks instead of years. This not only supports timely interventions and evaluations—allowing for adaptive management if efforts are not proving effective—but also enables the collection of more data from a broader range of locations. It also allows conservationists to direct their time toward more complex secondary analysis and making evidence-based conservation decisions.
 
+(development-history)=
 ## Development history
 
 Zamba's development has its origins in online machine learning challenges hosted by DrivenData in partnership with wildlife conservation experts—in particular from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA). Machine learning competitions have proven effective at harnessing community-driven innovation and enabling the rapid testing of thousands of approaches to solving a problem [@doi:10.48550/arXiv.1606.07781]. Zamba, named after the word for “forest” in Lingala, was created to make these advances more accessible to ecologists and conservationists.
 
 **2017: Pri-matrix Factorization Challenge and Zamba v1**
 
-In the Pri-matrix Factorization Challenge [@primatrix_competition], hosted by DrivenData and MPI-EVA, over 320 participants competed to develop accurate species detection models for camera trap video data. The competition used a unique dataset created through the Chimp&See Zooniverse project [@doi:10.1002/rse2.402], where thousands of citizen scientists manually labeled camera trap videos. Their efforts produced nearly 2,000 hours of annotated footage from the Chimp&See database[^footnote-chimpandsee-labeling]. The winning algorithm[^footnote-primatrix-winning-model] achieved 96% accuracy in detecting wildlife presence and 99% average accuracy in classifying species across 23 label classes [@primatrix_results] and formed the foundation of the initial version of Zamba, available through a command-line interface (CLI).
+In the [Pri-matrix Factorization Challenge](https://www.drivendata.org/competitions/49/deep-learning-camera-trap-animals/) [@primatrix_competition], hosted by DrivenData and MPI-EVA, over 320 participants competed to develop accurate species detection models for camera trap video data. The competition used a unique dataset created through the Chimp&See Zooniverse project [@doi:10.1002/rse2.402], where thousands of citizen scientists manually labeled camera trap videos. Their efforts produced nearly 2,000 hours of annotated footage from the Chimp&See database[^footnote-chimpandsee-labeling]. The winning algorithm[^footnote-primatrix-winning-model] achieved 96% accuracy in detecting wildlife presence and 99% average accuracy in classifying species across 23 label classes [@primatrix_results] and formed the foundation of the initial version of Zamba, available through a command-line interface (CLI).
 
 [^footnote-chimpandsee-labeling]: Since this data was non-expert labeled, certain thresholds on how many user annotations were required to accept a label as well as thresholds related to percentages of user agreement were applied to go from raw annotations to a well-labeled dataset.
 
@@ -55,7 +56,7 @@ Zamba underwent a major re-architecture to leverage recent advances in computer 
 
 **2021: Deep-Chimpact Challenge and depth estimation**
 
-DrivenData partnered again with the Max Planck Institute for Evolutionary Anthropology and the Wild Chimpanzee Foundation to host the Deep Chimpact: Depth Estimation for Wildlife Conservation challenge [@deepchimpact_competition]. More than 300 participants competed to develop models for monocular depth estimation—inferring the distance between camera traps and wildlife appearing at various points in video footage. In 2022, the second-place model from this challenge was integrated into Zamba as an inference module.
+DrivenData partnered again with the Max Planck Institute for Evolutionary Anthropology and the Wild Chimpanzee Foundation to host the [Deep Chimpact: Depth Estimation for Wildlife Conservation](https://www.drivendata.org/competitions/82/competition-wildlife-video-depth-estimation/) challenge [@deepchimpact_competition]. More than 300 participants competed to develop models for monocular depth estimation—inferring the distance between camera traps and wildlife appearing at various points in video footage. In 2022, the second-place model from this challenge was integrated into Zamba as an inference module.
 
 **2024–2025: Species classification for images**
 
@@ -231,6 +232,7 @@ The `slowfast` model architecture uses the SlowFast [@doi:10.48550/arXiv.1812.03
 | `european` | Western Europe | Trained on non-jungle ecologies | Finetuned `time_distributed` model | \~13,000 |
 :::
 
+(frame-selection-approach)=
 #### Frame selection approach
 
 One of the key technical challenges in working with camera trap videos—rather than still images—is frame selection. For datasets of interest, videos were 30 frames per second and typically about 60 seconds. Processing every frame as an image for such videos is computationally infeasible. Furthermore, animals may only be present in a minority of recorded frames, and processing "blank" frames is wasteful or can potentially degrade performance of downstream tasks.
