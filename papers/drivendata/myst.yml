@@ -86,6 +86,15 @@ project:
         - ffmpeg_wasm
         - ffmpeg
         - django
+        # LILA BC datasets
+        - channel_islands
+        - desert_lion_conservation
+        - ena24
+        - idaho
+        - island_conservation
+        - new_zealand_trailcams
+        - swg
+        - wcs
   exports:
     - id: pdf
       format: typst
