@@ -536,7 +536,7 @@ The median absolute error was relatively similar across species, though the dist
 Distribution of test set absolute error by species.
 :::
 
-@doi:10.1016/j.ecoinf.2021.101536 applied machine learning to monocular depth _using reference videos_ and reported a mean absolute error (MAE) of 1.85 m. The relatively similar performance (albeit on different datasets) suggests that reference videos are not necessary for accurate machine learning predictions.
+@doi:10.1016/j.ecoinf.2021.101536 applied machine learning to monocular depth _using reference videos_ and reported a mean absolute error (MAE) of 1.85 m. The relatively similar performance (albeit on different datasets) suggests that accurate machine learning predictions are possible without reference videos.
 
 ## Zamba Cloud
 
