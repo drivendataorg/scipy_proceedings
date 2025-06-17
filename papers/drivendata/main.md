@@ -520,7 +520,9 @@ Model performance is reported for the test set of nearly 12,000 frames described
 Distribution of distances in the depth estimation test set
 :::
 
-The depth estimation model has a mean absolute error (MAE) of 1.635m. The model is more accurate when predicting depth for animals closer to the camera. The MAE for animals ≤10 m from the camera trap is 1.06 m, while at further distances, the model underestimates distance. However, accuracy at closer distances is more important for distance sampling methods [@doi:10.1093/oso/9780198506492.001.0001].
+The depth estimation model has a mean absolute error (MAE) of 1.635 m. The model is more accurate when predicting depth for animals closer to the camera. The MAE for animals ≤10 m from the camera trap is 1.06 m, while at further distances, the model underestimates distance. However, accuracy at closer distances is more important for distance sampling methods [@doi:10.1093/oso/9780198506492.001.0001].
+
+@doi:10.1016/j.ecoinf.2021.101536 applied machine learning to monocular depth _using reference videos_ and reported a mean absolute error (MAE) of 1.85 m. The relatively similar performance (albeit on different datasets) suggests that accurate machine learning predictions are possible without reference videos.
 
 :::{figure} fig-depth-prediction-density.png
 :label: fig:depth-prediction-density
@@ -535,8 +537,6 @@ The median absolute error was relatively similar across species, though the dist
 :width: 640px
 Distribution of test set absolute error by species.
 :::
-
-@doi:10.1016/j.ecoinf.2021.101536 applied machine learning to monocular depth _using reference videos_ and reported a mean absolute error (MAE) of 1.85 m. The relatively similar performance (albeit on different datasets) suggests that accurate machine learning predictions are possible without reference videos.
 
 ## Zamba Cloud
 
