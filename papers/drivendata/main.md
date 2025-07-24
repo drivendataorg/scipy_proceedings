@@ -191,7 +191,7 @@ A large and diverse dataset is one of the most important factors influencing mod
 
 A carefully considered train–test split strategy is critical for camera trap data. Because each camera remains fixed in place, many videos share identical backgrounds. Without careful splitting, models risk overfitting to site-specific visual features rather than generalizing to animal appearance. To address this, Zamba uses a site-aware split strategy, where all videos from a single camera location are placed entirely in either the training or test set.
 
-Species labels in the dataset were standardized into 32 output classes using a manually curated mapping from vernacular names found in expert-labeled videos to a fixed set of target classes. The goal of this aggregation was to provide sufficient training examples per class while maintaining a level of taxonomic granularity useful to most users out of the box. For users who require finer-grained classification, Zamba also supports training of custom models.
+Species labels in the dataset were standardized into 32 output classes using a manually curated mapping from vernacular names found in expert-labeled videos to a fixed set of target classes. The goal of this aggregation was to provide sufficient training examples per class while maintaining a level of taxonomic granularity useful to most users out of the box. While the 32 classes supported by this model represent only a narrow slice of wildlife studied in conservation research, Zamba also supports users creating custom models to cover different species, habitat, and taxonomic ranks. See ["Custom model training"](#custom-model-training) for further discussion.
 
 :::{table} Example vernacular names that were all mapped to the `antelope_duiker` category
 :label: tbl:video-label-standardization
@@ -268,7 +268,9 @@ MegadetectorLite was trained on over 1 million frames. To improve detection of r
 
 #### Pretrained model performance
 
-Metrics for camera trap tasks are highly dataset-dependent and can vary widely depending on deployment context and class balance. Here, we report some illustrative evaluation metrics for Zamba's pretrained models using holdout validation.
+Metrics for camera trap tasks are highly dataset-dependent and can vary widely depending on deployment context and class balance. Here, we report some illustrative evaluation metrics for Zamba's pretrained models using holdout validation.[^footnote-video-benchmarking]
+
+[^footnote-video-benchmarking]: Note also that it is difficult to report meaningful comparisons to other tools or study results due to the lack of standard benchmark datasets. Additionally, model performance on the same dataset can depend on particular implementation details, like the specific supported class labels. Users are always encouraged to evaluate models on their own data. Additionally, Zamba supports fine-tuning custom models which can often be the best choice for achieving strong performance.
 
 The holdout set comprises a random sample of labeled videos, selected on a transect-by-transect basis. That is, all videos from a given transect are assigned entirely to either the training or holdout set. While not all use cases require this site-aware split, this is a stricter evaluation to performance on transects the model has never seen.
 
@@ -385,7 +387,7 @@ To maximize geographic and ecological diversity, the training dataset aggregated
 
 A key challenge in using data from these disparate sources is the lack of a unified taxonomy across datasets. Each dataset was collected independently, often for different research purposes, and the taxonomic granularity varies significantly. For example, some datasets label all birds under a generic “bird” class, while others distinguish specific bird species.
 
-To address this, we reviewed 1,231 label classes across the source datasets and curated a unified taxonomy with 178 label classes. These classes span a variety of Linnaean taxonomic ranks, with each class having a minimum of 100 annotations to ensure sufficient training examples.
+To address this, we reviewed 1,231 label classes across the source datasets and curated a unified taxonomy with 178 label classes. These classes span a variety of Linnaean taxonomic ranks, with each class having a minimum of 100 annotations to ensure sufficient training examples. As with the video models, these label classes represent a narrow subset of the wildlife of interest to conservationists. This model is intended to primarily serve as a base model for fine-tuning custom models, rather than serving as a general-purpose model that directly covers conservation use cases.
 
 As with the video classification models, a split-aware strategy was used to create training, validation, and test sets. All data from a given camera location were assigned to the same split to avoid overfitting to background features and ensure generalizable model performance.
 
@@ -407,7 +409,9 @@ The chosen ConvNeXt V2 base model contains 87.7 million parameters and operates 
 
 #### Pretrained model performance
 
-As with videos, metrics for camera trap tasks are highly dataset-dependent and can vary widely based on deployment context and class balance. Here, we report some illustrative metrics for Zamba's pretrained image model `lila.science` using holdout validation.
+As with videos, metrics for camera trap tasks are highly dataset-dependent and can vary widely based on deployment context and class balance. Here, we report some illustrative metrics for Zamba's pretrained image model `lila.science` using holdout validation.[^footnote-image-benchmarking]
+
+[^footnote-image-benchmarking]: Again, it is difficult to report meaningful comparisons to other tools or study results due to the lack of standard benchmark datasets. Additionally, model performance on the same dataset can depend on particular implementation details of a given model, like the specific supported class labels. We encourage users to evaluate models on their own data. Additionally, Zamba supports fine-tuning custom models which can often be the best choice for achieving strong performance.
 
 The holdout set reported here contains 449,263 randomly sampled observations held out from training. Splits were performed on a transect-by-transect basis[^footnote-image-transect] while ensuring at least one transect representing each label class is present in all splits. The holdout set is highly unbalanced, with a exponential-like distribution of class sizes. [Figure %s](#fig:image-class-obs-ecdf) shows an empirical cumulative distribution function (ECDF) of the number of observations in each class.
 
@@ -452,6 +456,13 @@ The top performing model from the second place ensemble[^footnote-depth-second-p
 
 Zamba's depth estimation model was developed using a unique dataset of approximately 3,900 videos, created by research teams from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA) and the Wild Chimpanzee Foundation (WCF). Videos were from Taï National Park in Côte d'Ivoire and Moyen-Bafing National Park in the Republic of Guinea and captured six different species: bushbucks, chimpanzees, duikers, elephants, leopards, and monkeys.
 
+Ground truth distances in the dataset were manually annotated with the aid of reference videos, which are recordings of field researchers walking away from each camera trap holding a sign up every meter to indicate how far they were from the camera. Such reference videos are a typical way to perform depth estimation for camera trap videos [@doi:10.1016/j.ecoinf.2021.101536]; however, they are time and resource intensive to record.
+
+:::{figure} fig-depth-reference-video.jpg
+:label: fig:depth-reference-video
+A researcher in Taï National Park, Côte d'Ivoire holding up a sign at 5 meters away as part of a depth reference video. Image courtesy of Wild Chimpanzee Foundation.
+:::
+
 Videos in the original dataset that included more than one animal were excluded as there was not a way in the labeled data to identify which distance label corresponded to which animal. This removed 18% of frames from the original Taï National Park dataset and 22% of frames from the original Moyen-Bafing dataset.
 
 Data was split evenly into a training dataset and a test dataset. Each site was either entirely in the train set or the test set, so all backgrounds used to evaluate submissions were new to the model.
@@ -488,14 +499,7 @@ The videos ranged between 5 seconds and 1 minute long. Each annotation includes 
 
 #### No references videos
 
-Reference videos are typically created as guides for manually labeling distances in camera trap videos [@doi:10.1016/j.ecoinf.2021.101536]; however, they are time and resource intensive to record. To create reference videos, field researchers record themselves walking away from each camera trap, holding up a sign every meter to indicate how far they were from the camera.
-
-The depth estimation model was not trained using any reference videos and was instead required to learn purely from monocular images. This is a more challenging task but enables more complete automation of the workflow.
-
-:::{figure} fig-depth-reference-video.jpg
-:label: fig:depth-reference-video
-A researcher in Taï National Park, Côte d'Ivoire holding up a sign at 5 meters away as part of a depth reference video. Image courtesy of Wild Chimpanzee Foundation.
-:::
+The depth estimation model was not trained using any reference videos directly. The model was instead required to learn purely from monocular images and the distance ground truth labels. This is a more challenging task but enables more complete automation of the workflow.
 
 #### Model architecture
 
@@ -590,3 +594,9 @@ Zamba is designed to accelerate human workflows rather than replace human expert
 ## Conclusion
 
 Zamba is a powerful tool in supporting wildlife conservation. Initially developed to tackle the technically demanding task of processing camera-trap videos, it has since expanded to handle images as well. A key capability of Zamba is the ability to fine-tune models to better target specific habitats or expand to new subjects of interest, with support for species classification for both videos and images. The Zamba open source package supports programmatic use at the command line or as a Python library, while Zamba Cloud provides a no-code option for non-programmer users. The use of automated machine learning workflows for camera trap data can save countless hours of valuable time, speed up conservation interventions, and enable camera traps to be used to their fullest potential.
+
+## Acknowledgments
+
+This project has been supported by funding from the Max Planck Institute for Evolutionary Anthropology, the Arcus Foundation, the Patrick J. McGovern Foundation, and the WILDLABS Awards 2024.
+
+The authors express their gratitude to collaborators, advisors, and data providers at the following organizations: the Pan African Programme: The Cultured Chimpanzee, the Max Planck Institute for Evolutionary Anthropology, the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig, Dan Morris... The authors thank the other contributors to the Zamba code base: Justin Chung Clark, Robert Gibboni, Katie Wetstone, and Casey Fitzpatrick. The authors also thank Dmytro Poplavskiy, the winner of the Pri-Matrix Challenge, whose winning solution was the basis for the original Zamba V1 video species classification model; and Kirill Brodt, the second-place winner of the Deep Chimpact Challenge, whose solution is the basis for the depth estimation model. Finally, the authors thank the reviewers who provided constructive comments and suggestions to improve the quality of the manuscript.
