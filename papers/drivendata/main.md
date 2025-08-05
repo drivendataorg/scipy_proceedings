@@ -205,6 +205,8 @@ Species labels in the dataset were standardized into 32 output classes using a m
 </table>
 :::
 
+An additional training dataset of European wildlife was used to fine-tune a model specialized for European species. This dataset includes camera trap videos from Hintenteiche bei Biesenbrow, Germany [@doi:10.1002/rse2.362].
+
 #### Classification model architecture
 
 Zamba includes four pretrained species classification video models that implement one of the two architectures: `time_distributed` or `slowfast`.[^footnote-video-other-architectures]
@@ -599,4 +601,4 @@ Zamba is a powerful tool in supporting wildlife conservation. Initially develope
 
 This project has been supported by funding from the Max Planck Institute for Evolutionary Anthropology, the Arcus Foundation, the Patrick J. McGovern Foundation, and the WILDLABS Awards 2024.
 
-The authors express their gratitude to collaborators, advisors, and data providers at the following organizations: the Pan African Programme: The Cultured Chimpanzee, the Max Planck Institute for Evolutionary Anthropology, the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig, Dan Morris... The authors thank the other contributors to the Zamba code base: Justin Chung Clark, Robert Gibboni, Katie Wetstone, and Casey Fitzpatrick. The authors also thank Dmytro Poplavskiy, the winner of the Pri-Matrix Challenge, whose winning solution was the basis for the original Zamba V1 video species classification model; and Kirill Brodt, the second-place winner of the Deep Chimpact Challenge, whose solution is the basis for the depth estimation model. Finally, the authors thank the reviewers who provided constructive comments and suggestions to improve the quality of the manuscript.
+The authors express their gratitude to collaborators, advisors, and data providers at the following organizations: the Pan African Programme: The Cultured Chimpanzee, the Max Planck Institute for Evolutionary Anthropology, the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig, the Helversen’sche Stiftung, and Dan Morris. The authors thank the other contributors to the Zamba code base: Justin Chung Clark, Robert Gibboni, Katie Wetstone, and Casey Fitzpatrick. The authors also thank Dmytro Poplavskiy, the winner of the Pri-Matrix Challenge, whose winning solution was the basis for the original Zamba V1 video species classification model; and Kirill Brodt, the second-place winner of the Deep Chimpact Challenge, whose solution is the basis for the depth estimation model. Finally, the authors thank the reviewers who provided constructive comments and suggestions to improve the quality of the manuscript.
