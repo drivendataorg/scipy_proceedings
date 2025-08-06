@@ -405,14 +405,14 @@ As with the video classification models, a split-aware strategy was used to crea
 
 #### Classification model architecture
 
-In order to select a backbone architecture, we conducted an experiment measuring validation F1 score against training epochs. The experiment included several modern neural network architectures that post-date the commonly used backbones in most existing camera trap models. The candidate architectures included ConvNeXt, BEiT, EfficientNet, LeViT, and ViT.
+In order to select a backbone architecture, we evaluated several modern neural network architectures that post-date the commonly used backbones in most existing camera trap models. The candidate architectures included ConvNeXt, BEiT, EfficientNet, LeViT, and ViT.
 
-[Figure %s](#fig:image-architecture-f1-curves) shows validation F1 score over training epochs for each backbone in the experiment. Variants of ConvNeXt outperformed others, achieving greater accuracy with fewer training epochs. Based on these results, we chose ConvNeXt V2 base as the backbone.
+[Figure %s](#fig:image-architecture-f1-curves) shows run curves for the different backbone architectures we evaluated. Runs for ConvNeXt variants outperformed others, achieving greater accuracy with fewer training epochs. Based on these results, we chose ConvNeXt V2 base as the backbone.
 
 :::{figure} fig-image-architecture-f1-curves.png
 :label: fig:image-architecture-f1-curves
 :width: 640px
-Validation F1 training curves for candidate model architectures.
+Validation F1 training run curves for candidate model architectures. The filled band shows the min and max range across runs, and the line shows the average across runs.
 :::
 
 The chosen ConvNeXt V2 base model contains 87.7 million parameters and operates on 224×224 pixel input crops. In [Figure %s](#fig:image-architecture-f1-curves), its performance is represented by the dark orange curve.
