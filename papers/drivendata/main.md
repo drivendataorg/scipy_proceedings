@@ -213,7 +213,7 @@ An additional training dataset of European wildlife was used to fine-tune a mode
 
 Zamba includes four pretrained species classification video models that implement one of the two architectures: `time_distributed` or `slowfast`.[^footnote-video-other-architectures]
 
-[^footnote-video-other-architectures]: Other architectures evaluated during development included image-based and video-based models such as ResNet [@doi:10.1109/CVPR.2016.90], R2Plus1D [@doi:10.1109/CVPR.2018.00675], TimeSFormer [@doi:10.48550/arXiv.2102.05095], X3D [@doi:10.1109/CVPR42600.2020.00028], and I3D [@doi:10.1109/CVPR.2017.502].
+[^footnote-video-other-architectures]: Other architectures evaluated in 2021 during development included image-based and video-based models such as ResNet [@doi:10.1109/CVPR.2016.90], R2Plus1D [@doi:10.1109/CVPR.2018.00675], TimeSFormer [@doi:10.48550/arXiv.2102.05095], X3D [@doi:10.1109/CVPR42600.2020.00028], and I3D [@doi:10.1109/CVPR.2017.502].
 
 The `time_distributed` model architecture is based on EfficientNetV2 [@doi:10.48550/arXiv.2104.00298]. EfficientNetV2 models are convolutional neural networks designed to jointly optimize model size and training speed. EfficientNetV2 is image-native, meaning it operates on each frame individually. The model is wrapped in a `TimeDistributed` layer [@fastai_timedistributed], which aggregates frame-level predictions into a single video-level prediction.
 
@@ -313,6 +313,10 @@ Due to a lack of standard benchmarks or comparable tools that perform species cl
 ##### Blank detection
 
 Blank detection is an important feature in camera trap workflows due to the high prevalence of blank videos. In our holdout set, 42% of videos contain no animal activity. The `blank_nonblank` model achieved 87% recall (correctly identifies 11,288 of 13,034 blank videos) and 84% precision (13,507 videos predicted as blank, of which 11,288 were correct).
+
+#### Applications to out-of-domain data
+
+While Zamba's pretrained models are trained to predict specific classes for species from Africa and Western Europe, it can be possible to effectively apply them to out-of-domain data that includes geographies or species that the model has never seen. In @takahe_case_study, we show a case study using a dataset of 3,056 videos from New Zealand. Using a targeted search approach with the African species `time_distributed` model, one can achieve a 76.5% precision and 82% recall using the `bird` label to classify takahē, a New-Zealand-native flightless bird.
 
 #### Configuration and customization
 
