@@ -25,7 +25,7 @@ As simple sensors, camera traps do not automatically label or filter the species
 
 One of the most common needs is filtering out “blank” images and videos, i.e., those that do not contain an animal but rather were a false trigger, potentially caused by wind, rain, or changes in light. These “blanks” account for up to 70% of captured images [@doi:10.48550/arXiv.1907.06772] in some datasets. Estimating animal distances in camera trap footage currently entails an extremely manual, time-intensive process. Automated distance extraction is estimated to be 21 times faster than manual labelling [@doi:10.1016/j.ecoinf.2021.101536].
 
-While more and more conservation organizations and researchers are collecting and storing camera trap data, many are not yet able to effectively use that data for decision-making. The people-power needed to view and annotate camera trap data is prohibitively expensive in terms of time and money, which results in organizations not using camera traps, data accumulating on hard drives, or long delays in turn-around while teams sift through thousands of incoming images and videos every month.
+While more and more conservation organizations and researchers are collecting and storing camera trap data, many are not yet able to effectively use that data for decision-making. The people-power needed to view and annotate camera trap data is prohibitively expensive in terms of time and money, which results in organizations not using camera traps; data accumulating on hard drives; or long delays in turn-around while teams sift through thousands of incoming images and videos every month.
 
 Machine learning (ML) models have shown significant promise in automating species identification from camera trap imagery [@doi:10.1111/2041-210X.14044]. Several software tools that leverage ML have gained widespread adoption in recent years, including MegaDetector [@doi:10.48550/arXiv.1907.06772], Wildlife Insights [@doi:10.1017/S0376892919000298], and Addax AI (formerly EcoAssist) [@doi:10.21105/joss.05581]. These tools have advanced the application of pretrained computer vision models for animal detection and species classification particularly for camera trap image data.
 
@@ -33,7 +33,9 @@ Accurate, accessible, and automated species detection enables improved monitorin
 
 ## Development history
 
-Zamba's development has its origins in online machine learning challenges hosted by DrivenData in partnership with wildlife conservation experts—in particular from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA). Machine learning competitions have proven effective at harnessing community-driven innovation and enabling the rapid testing of thousands of approaches to solving a problem [@doi:10.48550/arXiv.1606.07781]. Zamba, named after the word for “forest” in Lingala, was created to make these advances more accessible to ecologists and conservationists.
+Zamba's development has its origins in online machine learning challenges hosted by DrivenData in partnership with wildlife conservation experts—in particular from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA). Machine learning competitions have proven effective at harnessing community-driven innovation and enabling the rapid testing of thousands of approaches to solving a problem [@doi:10.48550/arXiv.1606.07781]. Zamba, named after the word for “forest” in Lingala[^footnote-lingala], was created to make these advances more accessible to ecologists and conservationists.
+
+[^footnote-lingala]: [Lingala](https://en.wikipedia.org/wiki/Lingala) is a Bantu language spoken in the Democratic Republic of Congo.
 
 **2017: Pri-matrix Factorization Challenge and Zamba v1**
 
