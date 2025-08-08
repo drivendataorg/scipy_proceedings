@@ -102,10 +102,10 @@ A large and diverse dataset is one of the most important factors influencing mod
 
 <tr>
 <td rowspan="3">Côte&nbsp;d'Ivoire</td>
-<td>Comoé&nbsp;National&nbsp;Park</td>
+<td>GEPRENAF–Comoé</td>
 </tr>
 <tr>
-<td>Guiroutou</td>
+<td>Djouroutou</td>
 </tr>
 <tr>
 <td>Taï&nbsp;National&nbsp;Park</td>
@@ -185,7 +185,7 @@ A large and diverse dataset is one of the most important factors influencing mod
 <td>Bwindi&nbsp;Forest&nbsp;National&nbsp;Park</td>
 </tr>
 <tr>
-<td>Ngogo&nbsp;and&nbsp;Kibale&nbsp;National&nbsp;Park</td>
+<td>Ngogo,&nbsp;Kibale&nbsp;National&nbsp;Park</td>
 </tr>
 </tbody>
 </table>
