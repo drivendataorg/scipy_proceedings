@@ -195,7 +195,7 @@ A carefully considered train–test split strategy is critical for camera trap d
 
 Species labels in the dataset were standardized into 32 output classes[^footnote-video-output-classes] using a manually curated mapping from vernacular names found in expert-labeled videos to a fixed set of target classes. The goal of this aggregation was to provide sufficient training examples per class while maintaining a level of taxonomic granularity useful to most users out of the box. While the 32 classes supported by this model represent only a narrow slice of wildlife studied in conservation research, Zamba also supports users creating custom models to cover different species, habitat, and taxonomic ranks. See ["Custom model training"](#custom-model-training) for further discussion.
 
-[^footnote-video-output-classes]: These output classes were selected based on the research needs of the data providers from the Pan African Programme: The Cultured Chimpanzee.
+[^footnote-video-output-classes]: These output classes were selected based on the research needs of the data providers from the Max Planck Institute for Evolutionary Anthropology.
 
 :::{table} Example vernacular names that were all mapped to the `antelope_duiker` category
 :label: tbl:video-label-standardization
@@ -215,7 +215,7 @@ An additional training dataset of European wildlife was used to fine-tune a mode
 
 Zamba includes four pretrained species classification video models that implement one of the two architectures: `time_distributed` or `slowfast`.[^footnote-video-other-architectures]
 
-[^footnote-video-other-architectures]: Other architectures evaluated in 2021 during development included image-based and video-based models such as ResNet [@doi:10.1109/CVPR.2016.90], R2Plus1D [@doi:10.1109/CVPR.2018.00675], TimeSFormer [@doi:10.48550/arXiv.2102.05095], X3D [@doi:10.1109/CVPR42600.2020.00028], and I3D [@doi:10.1109/CVPR.2017.502].
+[^footnote-video-other-architectures]: Other architectures evaluated during development in 2021 included image-based and video-based models such as ResNet [@doi:10.1109/CVPR.2016.90], R2Plus1D [@doi:10.1109/CVPR.2018.00675], TimeSFormer [@doi:10.48550/arXiv.2102.05095], X3D [@doi:10.1109/CVPR42600.2020.00028], and I3D [@doi:10.1109/CVPR.2017.502].
 
 The `time_distributed` model architecture is based on EfficientNetV2 [@doi:10.48550/arXiv.2104.00298]. EfficientNetV2 models are convolutional neural networks designed to jointly optimize model size and training speed. EfficientNetV2 is image-native, meaning it operates on each frame individually. The model is wrapped in a `TimeDistributed` layer [@fastai_timedistributed], which aggregates frame-level predictions into a single video-level prediction.
 
@@ -308,9 +308,7 @@ Model performance tends to be lower for:
   - Heavily occluded or distant animals, or those only partially visible or present for just a few frames
   - Low-quality media, such as videos that are washed out or too dark
 
-Due to a lack of standard benchmarks or comparable tools that perform species classification for videos, it is difficult to provide a direct comparison to other results.[^footnote-video-benchmarking] As an indirect comparison, the SpeciesNet model used by Wildlife Insights for _image_ species classification reports an 81.9% accuracy on their evaluation dataset[@doi:10.1049/cvi2.12318]. This demonstrates that Zamba's pretrained model performance is in a comparable range to other published results on a separate-but-related task.
-
-[^footnote-video-benchmarking]: Additionally, model performance on the same dataset can depend on particular implementation details, like the specific supported class labels. Users are always encouraged to evaluate models on their own data. Additionally, Zamba supports fine-tuning custom models which can often be the best choice for achieving strong performance.
+Because of a lack of comparable wildlife camera trap tools that perform species classificaiton for videos, it is difficult to provide a direct comparison to other results. Users are always encouraged to evaluate models on their own data. Additionally, Zamba supports fine-tuning custom models which can often be the best choice for achieving strong performance.
 
 ##### Blank detection
 
@@ -450,9 +448,9 @@ Complementary ECDF of F1 score for label classes in the holdout set with at leas
 Precision and recall values for a selection of label classes. The top half are the top 10 label classes ranked by F1 score, while the bottom half are the bottom 10 label classes ranked by F1 score. The parenthetical annotation gives the number of observations of that class.
 :::
 
-For an indirect comparison[^footnote-image-benchmarking], SpeciesNet, the model used by Wildlife Insights, report a 81.9% accuracy, 80.7 species-weighted-average F1 score, and 54.2 macro-averaged F1 score[@doi:10.1049/cvi2.12318]. This shows that Zamba's pretrained model is in a rough comparable range of performance as other published results.
+For an indirect comparison[^footnote-image-benchmarking], SpeciesNet, the model used by Wildlife Insights, report a 81.9% accuracy, 80.7 species-weighted-average F1 score, and 54.2 macro-averaged F1 score on a test dataset of 42,791 images with 101 lable classes[@doi:10.1049/cvi2.12318]. This comparison shows that Zamba's pretrained model is in an approximate comparable range of performance as the published results of similar tools.
 
-[^footnote-image-benchmarking]: As discussed for video species classification, it is difficult to report direct comparisons to other tools or study results due to the lack of standard benchmarking procedures and datasets. Model performance on the same dataset can depend on particular implementation details of a given model, like the specific supported class labels. We encourage users to evaluate models on their own data. Additionally, Zamba supports fine-tuning custom models which can often be the best choice for achieving strong performance.
+[^footnote-image-benchmarking]: As discussed for video species classification, it is difficult to report meaningful direct comparisons to other tools or study results. There are not well-established standard benchmarking procedures and datasets, and the high degree of variance in attributes across camera trap deployments means that performance is highly sensitive to similarity to the training data, and that metrics reported on one dataset do not necessarily translate well to others.
 
 ## Depth estimation for videos
 
@@ -472,7 +470,7 @@ The top performing model from the second place ensemble[^footnote-depth-second-p
 
 Zamba's depth estimation model was developed using a unique dataset of approximately 3,900 videos, created by research teams from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA) and the Wild Chimpanzee Foundation (WCF). Videos were from Taï National Park in Côte d'Ivoire and Moyen-Bafing National Park in the Republic of Guinea and captured six different species: bushbucks, chimpanzees, duikers, elephants, leopards, and monkeys.
 
-Ground truth distances in the dataset were manually annotated with the aid of reference videos, which are recordings of field researchers walking away from each camera trap holding a sign up every meter to indicate how far they were from the camera. Such reference videos are a typical way to perform depth estimation for camera trap videos [@doi:10.1016/j.ecoinf.2021.101536]; however, they are time and resource intensive to record.
+Ground truth distances in the dataset were manually annotated with the aid of reference videos, which are recordings of field researchers walking away from each camera trap holding a sign up every meter to indicate how far they were from the camera. Such reference videos are a typical way to perform depth estimation for camera trap videos [@doi:10.1016/j.ecoinf.2021.101536]; however, they are time and resource intensive to record and to use in labeling.
 
 :::{figure} fig-depth-reference-video.jpg
 :label: fig:depth-reference-video
@@ -615,4 +613,4 @@ Zamba is a powerful tool in supporting wildlife conservation. Initially develope
 
 This project has been supported by funding from the Max Planck Institute for Evolutionary Anthropology, the Arcus Foundation, the Patrick J. McGovern Foundation, and the WILDLABS Awards 2024.
 
-The authors express their gratitude to collaborators, advisors, and data providers at the following organizations: the Pan African Programme: The Cultured Chimpanzee, the Max Planck Institute for Evolutionary Anthropology, the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig, the Helversen’sche Stiftung, and Dan Morris. The authors thank the other contributors to the Zamba code base: Justin Chung Clark, Robert Gibboni, Katie Wetstone, and Casey Fitzpatrick. The authors also thank Dmytro Poplavskiy, the winner of the Pri-Matrix Challenge, whose winning solution was the basis for the original Zamba V1 video species classification model; and Kirill Brodt, the second-place winner of the Deep Chimpact Challenge, whose solution is the basis for the depth estimation model. Finally, the authors thank the reviewers who provided constructive comments and suggestions to improve the quality of the manuscript.
+The authors express their gratitude to collaborators, advisors, and data providers at the following organizations: the Max Planck Institute for Evolutionary Anthropology, the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig, the Helversen’sche Stiftung, and Dan Morris. The authors thank the other contributors to the Zamba and Zamba Cloud code bases: Justin Chung Clark, Robert Gibboni, Katie Wetstone, Tamara Glazer, Casey Fitzpatrick, Isaac Slavitt, and Stan Triepels. The authors also thank Dmytro Poplavskiy, the winner of the Pri-Matrix Challenge, whose winning solution was the basis for the original Zamba V1 video species classification model; and Kirill Brodt, the second-place winner of the Deep Chimpact Challenge, whose solution is the basis for the depth estimation model. The authors thank Hannah Moshontzde la Rocha for review and edits to the manuscript. Finally, the authors thank the reviewers who provided constructive comments and suggestions to improve the quality of the manuscript.
