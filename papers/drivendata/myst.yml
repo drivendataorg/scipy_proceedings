@@ -81,6 +81,7 @@ project:
         - primatrix_competition
         - primatrix_results
         - deepchimpact_competition
+        - takahe_case_study
         - fastai_timedistributed
         - lila_bc
         - ffmpeg_wasm
