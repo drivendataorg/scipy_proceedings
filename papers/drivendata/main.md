@@ -9,7 +9,7 @@ abstract: |
 
 Camera traps are automated camera systems typically triggered by motion, heat, or timers [@doi:10.1111/1365-2664.12432]. They are a widely used tool for wildlife monitoring in both research and conservation. However, they generate an immense volume of image and video data due to the nature of the data collection and scale of their deployment. It takes the valuable time of teams of experts, or thousands of citizen scientists, to manually process this data and identify videos and images of interest [@doi:10.1002/rse2.402].
 
-Automated computer vision systems offer a natural solution to assist with this data processing. Yet, two key gaps in the ecosystem remain. First, most tools only support processing image data, not video [@doi:10.1111/2041-210X.14044], and it is not computationally feasible to predict on all frames in a video as if they are images. Moreover, models that process video natively can leverage inter-frame information—such as motion—that is otherwise lost. Second, pretrained models fail to capture the wide range of environments and use cases for which camera traps are deployed. Wildlife monitoring projects vary widely in habitat, focal species, deployment context, and taxonomic resolution, necessitating adaptable models that can be fine-tuned to specific contexts.
+Automated computer vision systems offer a natural solution to assist with this data processing. Yet, two key gaps remain in the ecosystem for wildlife camera trap data. First, available domain-specific tools only support processing image data, not video [@doi:10.1111/2041-210X.14044], and it is not computationally feasible to predict on all frames in a video as if they are images. Moreover, models that process video natively can leverage inter-frame information—such as motion—that is otherwise lost. Second, pretrained models fail to capture the wide range of environments and use cases for which camera traps are deployed. Wildlife monitoring projects vary widely in habitat, focal species, deployment context, and taxonomic resolution, necessitating adaptable models that can be fine-tuned to specific contexts.
 
 We present [Zamba](https://github.com/drivendataorg/zamba) [@10.5281/zenodo.15116959], an open source Python package for using machine learning to process camera trap data. Zamba supports species classification for both videos and still images. Zamba also supports custom model training on user-provided camera trap data containing new species and new geographies not in the included pretrained models. In addition, Zamba includes inference-only video processing pipelines for depth estimation. Zamba also underlies [Zamba Cloud](https://www.zambacloud.com/), which is an accessible no-code web application that runs the python package on managed cloud resources. Zamba Cloud bridges a critical gap between the technical feasibility of training models and the practical ability for conservationists — who are often not programmers — to use them.
 
@@ -25,7 +25,7 @@ As simple sensors, camera traps do not automatically label or filter the species
 
 One of the most common needs is filtering out “blank” images and videos, i.e., those that do not contain an animal but rather were a false trigger, potentially caused by wind, rain, or changes in light. These “blanks” account for up to 70% of captured images [@doi:10.48550/arXiv.1907.06772] in some datasets. Estimating animal distances in camera trap footage currently entails an extremely manual, time-intensive process. Automated distance extraction is estimated to be 21 times faster than manual labelling [@doi:10.1016/j.ecoinf.2021.101536].
 
-While more and more conservation organizations and researchers are collecting and storing camera trap data, many are not yet able to effectively use that data for decision-making. The people-power needed to view and annotate camera trap data is prohibitively expensive in terms of time and money, which results in organizations not using camera traps, data accumulating on hard drives, or long delays in turn-around while teams sift through thousands of incoming images and videos every month.
+While more and more conservation organizations and researchers are collecting and storing camera trap data, many are not yet able to effectively use that data for decision-making. The people-power needed to view and annotate camera trap data is prohibitively expensive in terms of time and money, which results in organizations not using camera traps; data accumulating on hard drives; or long delays in turn-around while teams sift through thousands of incoming images and videos every month.
 
 Machine learning (ML) models have shown significant promise in automating species identification from camera trap imagery [@doi:10.1111/2041-210X.14044]. Several software tools that leverage ML have gained widespread adoption in recent years, including MegaDetector [@doi:10.48550/arXiv.1907.06772], Wildlife Insights [@doi:10.1017/S0376892919000298], and Addax AI (formerly EcoAssist) [@doi:10.21105/joss.05581]. These tools have advanced the application of pretrained computer vision models for animal detection and species classification particularly for camera trap image data.
 
@@ -33,7 +33,9 @@ Accurate, accessible, and automated species detection enables improved monitorin
 
 ## Development history
 
-Zamba's development has its origins in online machine learning challenges hosted by DrivenData in partnership with wildlife conservation experts—in particular from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA). Machine learning competitions have proven effective at harnessing community-driven innovation and enabling the rapid testing of thousands of approaches to solving a problem [@doi:10.48550/arXiv.1606.07781]. Zamba, named after the word for “forest” in Lingala, was created to make these advances more accessible to ecologists and conservationists.
+Zamba's development has its origins in online machine learning challenges hosted by DrivenData in partnership with wildlife conservation experts—in particular from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA). Machine learning competitions have proven effective at harnessing community-driven innovation and enabling the rapid testing of thousands of approaches to solving a problem [@doi:10.48550/arXiv.1606.07781]. Zamba, named after the word for “forest” in Lingala[^footnote-lingala], was created to make these advances more accessible to ecologists and conservationists.
+
+[^footnote-lingala]: [Lingala](https://en.wikipedia.org/wiki/Lingala) is a Bantu language spoken in the Democratic Republic of Congo.
 
 **2017: Pri-matrix Factorization Challenge and Zamba v1**
 
@@ -100,10 +102,10 @@ A large and diverse dataset is one of the most important factors influencing mod
 
 <tr>
 <td rowspan="3">Côte&nbsp;d'Ivoire</td>
-<td>Comoé&nbsp;National&nbsp;Park</td>
+<td>GEPRENAF–Comoé</td>
 </tr>
 <tr>
-<td>Guiroutou</td>
+<td>Djouroutou</td>
 </tr>
 <tr>
 <td>Taï&nbsp;National&nbsp;Park</td>
@@ -183,7 +185,7 @@ A large and diverse dataset is one of the most important factors influencing mod
 <td>Bwindi&nbsp;Forest&nbsp;National&nbsp;Park</td>
 </tr>
 <tr>
-<td>Ngogo&nbsp;and&nbsp;Kibale&nbsp;National&nbsp;Park</td>
+<td>Ngogo,&nbsp;Kibale&nbsp;National&nbsp;Park</td>
 </tr>
 </tbody>
 </table>
@@ -191,7 +193,9 @@ A large and diverse dataset is one of the most important factors influencing mod
 
 A carefully considered train–test split strategy is critical for camera trap data. Because each camera remains fixed in place, many videos share identical backgrounds. Without careful splitting, models risk overfitting to site-specific visual features rather than generalizing to animal appearance. To address this, Zamba uses a site-aware split strategy, where all videos from a single camera location are placed entirely in either the training or test set.
 
-Species labels in the dataset were standardized into 32 output classes using a manually curated mapping from vernacular names found in expert-labeled videos to a fixed set of target classes. The goal of this aggregation was to provide sufficient training examples per class while maintaining a level of taxonomic granularity useful to most users out of the box. For users who require finer-grained classification, Zamba also supports training of custom models.
+Species labels in the dataset were standardized into 32 output classes[^footnote-video-output-classes] using a manually curated mapping from vernacular names found in expert-labeled videos to a fixed set of target classes. The goal of this aggregation was to provide sufficient training examples per class while maintaining a level of taxonomic granularity useful to most users out of the box. While the 32 classes supported by this model represent only a narrow slice of wildlife studied in conservation research, Zamba also supports users creating custom models to cover different species, habitat, and taxonomic ranks. See ["Custom model training"](#custom-model-training) for further discussion.
+
+[^footnote-video-output-classes]: These output classes were selected based on the research needs of the data providers from the Max Planck Institute for Evolutionary Anthropology.
 
 :::{table} Example vernacular names that were all mapped to the `antelope_duiker` category
 :label: tbl:video-label-standardization
@@ -205,11 +209,13 @@ Species labels in the dataset were standardized into 32 output classes using a m
 </table>
 :::
 
+An additional training dataset of European wildlife was used to fine-tune a model specialized for European species. This dataset includes camera trap videos from Hintenteiche bei Biesenbrow, Germany [@doi:10.1002/rse2.362].
+
 #### Classification model architecture
 
 Zamba includes four pretrained species classification video models that implement one of the two architectures: `time_distributed` or `slowfast`.[^footnote-video-other-architectures]
 
-[^footnote-video-other-architectures]: Other architectures evaluated during development included image-based and video-based models such as ResNet [@doi:10.1109/CVPR.2016.90], R2Plus1D [@doi:10.1109/CVPR.2018.00675], TimeSFormer [@doi:10.48550/arXiv.2102.05095], X3D [@doi:10.1109/CVPR42600.2020.00028], and I3D [@doi:10.1109/CVPR.2017.502].
+[^footnote-video-other-architectures]: Other architectures evaluated during development in 2021 included image-based and video-based models such as ResNet [@doi:10.1109/CVPR.2016.90], R2Plus1D [@doi:10.1109/CVPR.2018.00675], TimeSFormer [@doi:10.48550/arXiv.2102.05095], X3D [@doi:10.1109/CVPR42600.2020.00028], and I3D [@doi:10.1109/CVPR.2017.502].
 
 The `time_distributed` model architecture is based on EfficientNetV2 [@doi:10.48550/arXiv.2104.00298]. EfficientNetV2 models are convolutional neural networks designed to jointly optimize model size and training speed. EfficientNetV2 is image-native, meaning it operates on each frame individually. The model is wrapped in a `TimeDistributed` layer [@fastai_timedistributed], which aggregates frame-level predictions into a single video-level prediction.
 
@@ -233,7 +239,7 @@ The `slowfast` model architecture uses the SlowFast [@doi:10.48550/arXiv.1812.03
 
 #### Frame selection approach
 
-One of the key technical challenges in working with camera trap videos—rather than still images—is frame selection. For datasets of interest, videos had a frame rate of 30 frames per second and were typically about 60 seconds long. Processing every frame as an image for such videos is computationally infeasible. Furthermore, animals may only be present in a minority of recorded frames, and selecting frames without the animal degrades the performance of downstream tasks like species classification and depth estimation.
+One of the key technical challenges in working with camera trap videos—rather than still images—is frame selection. For datasets that motivated the development of Zamba, videos had a frame rate of 30 frames per second and were typically about 60 seconds long. Processing every frame as an image for such videos is computationally infeasible. Furthermore, animals may only be present in a minority of recorded frames, and selecting frames without the animal degrades the performance of downstream tasks like species classification and depth estimation.
 
 ::::{figure}
 :label: fig:video-animal-present-examples
@@ -249,7 +255,9 @@ One of the key technical challenges in working with camera trap videos—rather 
 Two example videos where the animal is only present for the first few seconds of the one minute video
 ::::
 
-The default frame selection method currently used by Zamba is an efficient object detection model we developed called MegadetectorLite. This model evaluates each frame for the likelihood that it contains an animal. The top 16 frames with the highest detection probabilities are selected and passed to either the species classification or blank detection models.
+The default frame selection method currently used by Zamba is an efficient object detection model we developed called MegadetectorLite. This model evaluates each frame for the likelihood that it contains an animal. By default, the top 16 frames[^footnote-frame-number] with the highest detection probabilities are selected and passed to either the species classification or blank detection models.
+
+[^footnote-frame-number]: This parameter was found empirically via crowd-sourced experimentation by participants in the Pri-matrix Factorization Challenge to be sufficient for accurately classifying videos while balancing the overall computational requirements of the pipeline. Users may choose to tune this parameter for their particular dataset and use case. See the ["Configuration and customization"](#configuration-and-customization) section.
 
 :::{figure} fig-video-pipeline-flow.png
 :label: fig:video-pipeline-flow
@@ -300,9 +308,15 @@ Model performance tends to be lower for:
   - Heavily occluded or distant animals, or those only partially visible or present for just a few frames
   - Low-quality media, such as videos that are washed out or too dark
 
+Because of a lack of comparable wildlife camera trap tools that perform species classificaiton for videos, it is difficult to provide a direct comparison to other results. Users are always encouraged to evaluate models on their own data. Additionally, Zamba supports fine-tuning custom models which can often be the best choice for achieving strong performance.
+
 ##### Blank detection
 
 Blank detection is an important feature in camera trap workflows due to the high prevalence of blank videos. In our holdout set, 42% of videos contain no animal activity. The `blank_nonblank` model achieved 87% recall (correctly identifies 11,288 of 13,034 blank videos) and 84% precision (13,507 videos predicted as blank, of which 11,288 were correct).
+
+#### Applications to out-of-domain data
+
+While Zamba's pretrained models are trained to predict specific classes for species from Africa and Western Europe, it can be possible to effectively apply them to out-of-domain data that includes geographies or species that the model has never seen. In @takahe_case_study, we show a case study using a dataset of 3,056 videos from New Zealand. Using a targeted search approach with the African species `time_distributed` model, one can achieve a 76.5% precision and 82% recall using the `bird` label to classify takahē, a New-Zealand-native flightless bird.
 
 #### Configuration and customization
 
@@ -385,20 +399,20 @@ To maximize geographic and ecological diversity, the training dataset aggregated
 
 A key challenge in using data from these disparate sources is the lack of a unified taxonomy across datasets. Each dataset was collected independently, often for different research purposes, and the taxonomic granularity varies significantly. For example, some datasets label all birds under a generic “bird” class, while others distinguish specific bird species.
 
-To address this, we reviewed 1,231 label classes across the source datasets and curated a unified taxonomy with 178 label classes. These classes span a variety of Linnaean taxonomic ranks, with each class having a minimum of 100 annotations to ensure sufficient training examples.
+To address this, we reviewed 1,231 label classes across the source datasets and curated a unified taxonomy with 178 label classes. These classes span a variety of Linnaean taxonomic ranks, with each class having a minimum of 100 annotations to ensure sufficient training examples. As with the video models, these label classes represent a narrow subset of the wildlife of interest to conservationists. This model is intended to primarily serve as a base model for fine-tuning custom models, rather than serving as a general-purpose model that directly covers conservation use cases.
 
 As with the video classification models, a split-aware strategy was used to create training, validation, and test sets. All data from a given camera location were assigned to the same split to avoid overfitting to background features and ensure generalizable model performance.
 
 #### Classification model architecture
 
-We evaluated several modern neural network architectures that post-date the commonly used backbones in most existing camera trap models. The candidate architectures included ConvNeXt, BEiT, EfficientNet, LeViT, and ViT.
+In order to select a backbone architecture, we evaluated several modern neural network architectures that post-date the commonly used backbones in most existing camera trap models. The candidate architectures included ConvNeXt, BEiT, EfficientNet, LeViT, and ViT.
 
-[Figure %s](#fig:image-architecture-f1-curves) shows validation F1 score over training epochs for each backbone. Variants of ConvNeXt consistently outperformed others, achieving high accuracy with fewer training epochs. Based on these results, Zamba’s image classification model adopts ConvNeXt V2 base as its backbone.
+[Figure %s](#fig:image-architecture-f1-curves) shows run curves for the different backbone architectures we evaluated. Runs for ConvNeXt variants outperformed others, achieving greater accuracy with fewer training epochs. Based on these results, we chose ConvNeXt V2 base as the backbone.
 
 :::{figure} fig-image-architecture-f1-curves.png
 :label: fig:image-architecture-f1-curves
 :width: 640px
-Validation F1 training curves for candidate model architectures.
+Validation F1 training run curves for candidate model architectures. The filled band shows the min and max range across runs, and the line shows the average across runs.
 :::
 
 The chosen ConvNeXt V2 base model contains 87.7 million parameters and operates on 224×224 pixel input crops. In [Figure %s](#fig:image-architecture-f1-curves), its performance is represented by the dark orange curve.
@@ -434,6 +448,10 @@ Complementary ECDF of F1 score for label classes in the holdout set with at leas
 Precision and recall values for a selection of label classes. The top half are the top 10 label classes ranked by F1 score, while the bottom half are the bottom 10 label classes ranked by F1 score. The parenthetical annotation gives the number of observations of that class.
 :::
 
+For an indirect comparison[^footnote-image-benchmarking], SpeciesNet, the model used by Wildlife Insights, report a 81.9% accuracy, 80.7 species-weighted-average F1 score, and 54.2 macro-averaged F1 score on a test dataset of 42,791 images with 101 lable classes[@doi:10.1049/cvi2.12318]. This comparison shows that Zamba's pretrained model is in an approximate comparable range of performance as the published results of similar tools.
+
+[^footnote-image-benchmarking]: As discussed for video species classification, it is difficult to report meaningful direct comparisons to other tools or study results. There are not well-established standard benchmarking procedures and datasets, and the high degree of variance in attributes across camera trap deployments means that performance is highly sensitive to similarity to the training data, and that metrics reported on one dataset do not necessarily translate well to others.
+
 ## Depth estimation for videos
 
 Statistical models can be used to estimate animal abundance from camera trapping [@doi:10.1111/cobi.13517]. One such method is the distance sampling framework [@doi:10.1016/j.ecoinf.2021.101536], which combines the frequency of animal sightings with the distance of each animal from the camera to estimate a species' full population size [@doi:10.1111/2041-210X.12790]. In the following sections, we outline the training data, model architecture, and performance of Zamba’s depth estimation approach for videos.
@@ -451,6 +469,13 @@ The top performing model from the second place ensemble[^footnote-depth-second-p
 #### Training data
 
 Zamba's depth estimation model was developed using a unique dataset of approximately 3,900 videos, created by research teams from the Max Planck Institute for Evolutionary Anthropology (MPI-EVA) and the Wild Chimpanzee Foundation (WCF). Videos were from Taï National Park in Côte d'Ivoire and Moyen-Bafing National Park in the Republic of Guinea and captured six different species: bushbucks, chimpanzees, duikers, elephants, leopards, and monkeys.
+
+Ground truth distances in the dataset were manually annotated with the aid of reference videos, which are recordings of field researchers walking away from each camera trap holding a sign up every meter to indicate how far they were from the camera. Such reference videos are a typical way to perform depth estimation for camera trap videos [@doi:10.1016/j.ecoinf.2021.101536]; however, they are time and resource intensive to record and to use in labeling.
+
+:::{figure} fig-depth-reference-video.jpg
+:label: fig:depth-reference-video
+A researcher in Taï National Park, Côte d'Ivoire holding up a sign at 5 meters away as part of a depth reference video. Image courtesy of Wild Chimpanzee Foundation.
+:::
 
 Videos in the original dataset that included more than one animal were excluded as there was not a way in the labeled data to identify which distance label corresponded to which animal. This removed 18% of frames from the original Taï National Park dataset and 22% of frames from the original Moyen-Bafing dataset.
 
@@ -488,14 +513,7 @@ The videos ranged between 5 seconds and 1 minute long. Each annotation includes 
 
 #### No references videos
 
-Reference videos are typically created as guides for manually labeling distances in camera trap videos [@doi:10.1016/j.ecoinf.2021.101536]; however, they are time and resource intensive to record. To create reference videos, field researchers record themselves walking away from each camera trap, holding up a sign every meter to indicate how far they were from the camera.
-
-The depth estimation model was not trained using any reference videos and was instead required to learn purely from monocular images. This is a more challenging task but enables more complete automation of the workflow.
-
-:::{figure} fig-depth-reference-video.jpg
-:label: fig:depth-reference-video
-A researcher in Taï National Park, Côte d'Ivoire holding up a sign at 5 meters away as part of a depth reference video. Image courtesy of Wild Chimpanzee Foundation.
-:::
+The depth estimation model was not trained using any reference videos directly. The model was instead required to learn purely from monocular images and the distance ground truth labels. This is a more challenging task but enables more complete automation of the workflow.
 
 #### Model architecture
 
@@ -590,3 +608,9 @@ Zamba is designed to accelerate human workflows rather than replace human expert
 ## Conclusion
 
 Zamba is a powerful tool in supporting wildlife conservation. Initially developed to tackle the technically demanding task of processing camera-trap videos, it has since expanded to handle images as well. A key capability of Zamba is the ability to fine-tune models to better target specific habitats or expand to new subjects of interest, with support for species classification for both videos and images. The Zamba open source package supports programmatic use at the command line or as a Python library, while Zamba Cloud provides a no-code option for non-programmer users. The use of automated machine learning workflows for camera trap data can save countless hours of valuable time, speed up conservation interventions, and enable camera traps to be used to their fullest potential.
+
+## Acknowledgments
+
+This project has been supported by funding from the Max Planck Institute for Evolutionary Anthropology, the Arcus Foundation, the Patrick J. McGovern Foundation, and the WILDLABS Awards 2024.
+
+The authors express their gratitude to collaborators, advisors, and data providers at the following organizations: the Max Planck Institute for Evolutionary Anthropology, the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig, the Helversen’sche Stiftung, and Dan Morris. The authors thank the other contributors to the Zamba and Zamba Cloud code bases: Justin Chung Clark, Robert Gibboni, Katie Wetstone, Tamara Glazer, Casey Fitzpatrick, Isaac Slavitt, and Stan Triepels. The authors also thank Dmytro Poplavskiy, the winner of the Pri-Matrix Challenge, whose winning solution was the basis for the original Zamba V1 video species classification model; and Kirill Brodt, the second-place winner of the Deep Chimpact Challenge, whose solution is the basis for the depth estimation model. The authors thank Hannah Moshontzde la Rocha for review and edits to the manuscript. Finally, the authors thank the reviewers who provided constructive comments and suggestions to improve the quality of the manuscript.
