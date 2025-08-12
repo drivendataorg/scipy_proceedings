@@ -526,7 +526,9 @@ The depth estimation pipeline applies the following steps. First, videos are res
 Flow diagram of the video depth estimation pipeline. Gray nodes indicate data and blue nodes indicate a processing step.
 :::
 
-The depth estimation model uses an EfficientNetV2 [@doi:10.48550/arXiv.2104.00298] backbone and the output is a scalar estimated distance in meters between the animal and the camera. The inputs to the model are 5 frames stacked channelwise, where the frames are chronological and the middle frame corresponds to the present frame for which the depth estimation is made.  The frames are downsampled to 270x480. The model was trained with heavy augmentations for 80 epochs with a batch size of 32, AdamW optimizer, and CosineAnnealingLR scheduler with a period of 25 epochs.
+The depth estimation model uses an EfficientNetV2 [@doi:10.48550/arXiv.2104.00298] backbone and the output is a scalar estimated distance in meters between the animal and the camera. The inputs to the model are 5 frames stacked channelwise, where the frames are chronological and the middle frame corresponds to the present frame for which the depth estimation is made.  The frames are downsampled to 270x480. The model was trained with heavy augmentations for 80 epochs with a batch size of 32, AdamW optimizer, and CosineAnnealingLR scheduler with a period of 25 epochs.[^footnote-depth-hyperparameters]
+
+[^footnote-depth-hyperparameters]: These hyperparameters were part of the second-place winning solution of the Deep Chimpact Challenge and found empirically.
 
 ### Results
 
