@@ -211,29 +211,6 @@ project:
         - Wild Chimpanzee Foundation
         - Max Planck Institute for Evolutionary Anthropology
 
-
-# Alex Piel	author	Alex K. Piel <a.piel@ucl.ac.uk>	0000-0002-4674-537X	University College London, Department of Anthropology, 14 Taviton Street, London WC1H 0BW, UK ,Department of Human Origins, Max Planck Institute for Evolutionary Anthropology , Deutscher Platz 6, 04103 Leipzig ,GMERC, LTD. (Greater Mahale Ecosystem Research and Conservation Project)	Resources
-# Catherine Crockford	author	Catherine Crockford <crockford@isc.cnrs.fr>	0000-0001-6597-5106	Ape Social Mind Lab, Institute for Cognitive Sciences Marc Jeannerod, UMR 5229 CNRS / University of Lyon 1, 67 bd Pinel, 69675 Bron CEDEX, France ,Taï Chimpanzee Project, Centre Suisse de Recherches Scientifiques, BP 1301, Abidjan 01, CI ,	Resources
-# Crickette Sanz	author	Csanz <csanz@wustl.edu>	0000-0003-2018-2721	Washington University in Saint Louis, Department of Anthropology, One Brookings Drive, St. Louis, MO 63130, USA ,Congo Program, Wildlife Conservation Society, 151 Avenue Charles de Gaulle, Brazzaville, Republic of Congo ,	Resources, Data Curation
-# David Morgan	author	dmorgan@lpzoo.org	0000-0003-1266-2610	Lester E. Fisher Center for the Study and Conservation of Apes, Lincoln Park Zoo, 2001 North Clark Street, Chicago, Illinois 60614 USA , ,	Resources, Data Curation
-# Fiona Stewart	author	Fiona A. Stewart <f.stewart@ucl.ac.uk>	0000-0002-4929-4711	University College London, Department of Anthropology, 14 Taviton Street, London WC1H 0BW, UK ,Department of Human Origins, Max Planck Institute for Evolutionary Anthropology , Deutscher Platz 6, 04103 Leipzig ,GMERC, LTD. (Greater Mahale Ecosystem Research and Conservation Project)	Resources
-# Kevin E. Langergraber	author	Kevin.Langergraber@asu.edu	0000-0003-1697-4558	"School of Human Evolution and Social Change, Arizona State University, 900 Cady Mall, Tempe, AZ 85287 Arizona State University, PO Box 872402, Tempe, AZ 85287-2402 USA ,Institute of Human Origins
-# PO Box 878404
-# Tempe, AZ 85287-8404 ,"	Resources
-# Klaus Zuberbuehler	author	ZUBERBUEHLER Klaus <klaus.zuberbuehler@unine.ch>	0000-0001-8378-088X	Université de Neuchâtel, Institut de Biologie, Rue Emile-Argand 11, 2000 Neuchâtel, Switzerland ,School of Psychology and Neuroscience, University of St Andrews, St Andrews, UK ,	Resources
-# Martha Robbins	author	robbins@eva.mpg.de	0000-0002-6037-7542	Max Planck Institute for Evolutionary Anthropology , Department of Primate Behavior and Evolution, Deutscher Platz 6, 04103 Leipzig , ,	Resources
-# Mattia Bessone	author	Mattia Bessone <mattia.bessone@gmail.com>	0000-0002-8066-6413	Max Planck Institute for Evolutionary Anthropology , Deutscher Platz 6, 04103 Leipzig ,University of Konstanz, Centre for the Advanced Study of Collective Behaviour, Universitätsstraße 10, 78464, Konstanz, Germany ,Department of Animal Societies, Max Planck Institute of Animal Behavior, Bücklestrasse 5a, 78467, Konstanz, Germany	Resources, Data Curation
-# Roman M. Wittig	author	roman.wittig@isc.cnrs.fr, romanmwittig@gmail.com	0000-0001-6490-4031	Ape Social Mind Lab, Institute for Cognitive Sciences Marc Jeannerod, UMR 5229 CNRS / University of Lyon 1, 67 bd Pinel, 69675 Bron CEDEX, France ;Taï Chimpanzee Project, Centre Suisse de Recherches Scientifiques, BP 1301, Abidjan 01, Cote d'Ivoire	Resources
-# Tobias Deschner	author	tdeschner@uni-osnabrueck.de	0000-0002-9873-316X	Institute of Cognitive Science, University of Osnabrück, Artilleriestrasse 34, 49076 Osnabrück, Germany ,Max Planck Institute for Evolutionary Anthropology, Deutscher Platz 6, 04103, Leipzig, Germany ,	Resources
-# Volker Sommer	author	Volker Sommer <v.sommer@ucl.ac.uk> (and volkersommer@hotmail.com)	0000-0001-6749-3362	University College London, Department of Anthropology, 14 Taviton Street, London WC1H 0BW, UK; Gashaka Primate Project, Serti, Taraba State, Nigeria	Resources
-# Meredith S. Palmer	author	meredith.s.palmer@yale.edu; mspalmer.zool@gmail.com	0000-0002-1416-1732	Center for Biodiversity and Global Change, Yale University, New Haven, Connecticut USA	Resources, Data Curation
-# Barbara Fruth	author	bfruth@ab.mpg.de	0000-0001-9217-3053	Department for the Ecology of Animal Societies, Max-Planck Institute of Animal Behavior, Konstanz, Germany; Centre for Research and Conservation/KMDA, Antwerp, Belgium	Resources, Data Curation
-# Janika Wendefeuer	author	janika.wendefeuer@gmail.com	0000-0002-4832-6603	"Universität Hamburg; WWF Central African Republic
-
-# "	Resources, Data Curation
-# Benjamin Debetencourt	author	b_debetencourt@eva.mpg.de; b.debetencourt@gmail.com	0000-0003-2452-0986	Wild Chimpanzee Foundation, 69 Chemin de Planta, 1227, Cologny, Switzerland; Max Planck Institute for Evolutionary Anthropology, Deutscher Platz 6, 04103, Leipzig Germany	Resources, Data Curation
-
-
   keywords:
     - camera traps
     - computer vision
