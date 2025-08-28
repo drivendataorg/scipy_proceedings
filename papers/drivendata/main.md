@@ -244,11 +244,11 @@ One of the key technical challenges in working with camera trap videos—rather 
 ::::{figure}
 :label: fig:video-animal-present-examples
 
-:::{figure} fig-video-animal-present-example-1.mp4
+:::{figure} fig-video-animal-present-example-1
 :alt: An example camera trap video
 :::
 
-:::{figure} fig-video-animal-present-example-2.mp4
+:::{figure} fig-video-animal-present-example-2
 :alt: Another example camera trap video
 :::
 
