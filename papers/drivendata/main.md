@@ -244,15 +244,15 @@ One of the key technical challenges in working with camera trap videos—rather 
 ::::{figure}
 :label: fig:video-animal-present-examples
 
-:::{figure} fig-video-animal-present-example-1.mp4
+:::{figure} fig-video-animal-present-example-1
 :alt: An example camera trap video
 :::
 
-:::{figure} fig-video-animal-present-example-2.mp4
+:::{figure} fig-video-animal-present-example-2
 :alt: Another example camera trap video
 :::
 
-Two example videos where the animal is only present for the first few seconds of the one minute video
+Excerpts from two 60-second example videos in which animals appear only briefly. Each excerpt shows the first 5 seconds; the remaining 55 seconds contain an unoccupied field of view.
 ::::
 
 The default frame selection method currently used by Zamba is an efficient object detection model we developed called MegadetectorLite. This model evaluates each frame for the likelihood that it contains an animal. By default, the top 16 frames[^footnote-frame-number] with the highest detection probabilities are selected and passed to either the species classification or blank detection models.
