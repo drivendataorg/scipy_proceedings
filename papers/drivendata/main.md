@@ -252,7 +252,7 @@ One of the key technical challenges in working with camera trap videos—rather 
 :alt: Another example camera trap video
 :::
 
-Excerpts from two example videos where the animals are only present for a small fraction of the full video duration. These show the first 5 seconds; the original videos are each 60 seconds long. The empty fields of view at the end of the each excerpt persist for the remaining 55 seconds.
+Excerpts from two 60-second example videos in which animals appear only briefly. Each excerpt shows the first 5 seconds; the remaining 55 seconds consist of empty fields of view.
 ::::
 
 The default frame selection method currently used by Zamba is an efficient object detection model we developed called MegadetectorLite. This model evaluates each frame for the likelihood that it contains an animal. By default, the top 16 frames[^footnote-frame-number] with the highest detection probabilities are selected and passed to either the species classification or blank detection models.
