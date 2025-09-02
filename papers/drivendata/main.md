@@ -278,9 +278,7 @@ MegadetectorLite was trained on over 1 million frames. To improve detection of r
 
 Metrics for camera trap tasks are highly dataset-dependent and can vary widely depending on deployment context and class balance. Here, we report some illustrative evaluation metrics for Zamba's pretrained models using holdout validation.
 
-The holdout set comprises a random sample of labeled videos, selected on a transect-by-transect basis[^footnote-video-transect]. That is, all videos from a given transect are assigned entirely to either the training or holdout set. While not all use cases require this site-aware split, this is a stricter evaluation to performance on transects the model has never seen.
-
-[^footnote-video-transect]: This means all videos from a given transect (camera location) are assigned entirely to one split.
+The holdout set comprises a random sample of labeled videos, selected on a transect-by-transect basis. That is, all videos from a given transect (camera location) are assigned entirely to either the training or holdout set. While not all use cases require this site-aware split, this is a stricter evaluation to performance on transects the model has never seen.
 
 The holdout set includes data from all 14 countries in the training dataset, with country-level proportions roughly matching those of the complete set. [Figure %s](#fig:video-holdout-distribution) shows the distribution of videos across 30 animal species, as well as a substantial number of blank videos and some containing humans.
 
