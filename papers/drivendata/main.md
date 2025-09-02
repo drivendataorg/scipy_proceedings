@@ -346,7 +346,7 @@ Zamba supports two fine-tuning scenarios based on label compatibility:
 
 ## Classifying species in images
 
-While Zamba began with a focus on video data, the majority of camera trap users today collect still images. Images have several practical advantages: they require less storage space, use less battery life, and are faster to transfer, review, and process. Images are often sufficient for determining presence or absence of a particular species and can be used for distance sampling as well to get to abundance estimates.
+While Zamba began with a focus on video data, the majority of camera trap users today collect still images. Images have several practical advantages: they require less storage space, use less battery life, and are faster to transfer, review, and process. Images are often sufficient for determining presence or absence of a particular species and can be used for distance sampling [@doi:10.1016/j.ecoinf.2021.101536] as well to get to abundance estimates.
 
 There are a number of machine learning tools for processing camera trap images [@doi:10.1111/2041-210X.14044]. However, static pretrained models fail to capture the diversity in camera trap images and the range of environments in which camera traps are used around the globe.
 
