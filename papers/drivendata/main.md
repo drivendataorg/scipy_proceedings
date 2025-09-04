@@ -201,6 +201,7 @@ Species labels in the dataset were standardized into 32 output classes[^footnote
 :::{table} Example vernacular names that were all mapped to the target class `antelope_duiker`
 :label: tbl:video-label-standardization
 <table>
+  <tr><th></th><th></th><th></th><th></th><th></th></tr>
   <tr><td>antilope spp.</td><td>bongo</td><td>bushbuck</td><td>dikdik</td><td>duiker</td></tr>
   <tr><td>eland</td><td>gazelle</td><td>grantsgazelle</td><td>hartebeest</td><td>impala</td></tr>
   <tr><td>jentink's duiker</td><td>kudu</td><td>maxwell's duiker</td><td>nyala</td><td>ogilby's duiker</td></tr>
